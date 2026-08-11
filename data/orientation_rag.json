@@ -1,0 +1,689 @@
+[
+  {
+    "id": "presentation_du_salon_de_l_orientation_sdo",
+    "source": "guide_orientation",
+    "titre": "Présentation du Salon de l'Orientation (SDO)",
+    "contenu": {
+      "texte": "C’EST QUOI LE SALON DE L’ORIENTATION ?\nDans sa dynamique de réforme du système d’enseignement supérieur, le Ministère de l’Enseignement Supérieur, de la Recherche Scientifique et de l’Innovation (MESRSI) a développé la plateforme d’orientation des bacheliers en ligne ParcourSup Guinée afin de dématérialiser le processus. Cette réforme s’inscrit dans le cadre de la démocratisation de l’accès des bacheliers aux Institutions d’Enseignement Supérieur.\nDans l’accomplissement de cette tâche, les bacheliers rencontrent souvent des difficultés qui nécessitent un accompagnement. D’où la mise en place par le département d’un centre d’appel pour s’occuper de la prise en charge des préoccupations des bacheliers lors de la campagne d’orientation. Ces préoccupations varient d’un bachelier à un autre. Ce qui nécessite souvent un accompagnement de proximité.\nAinsi, le MESRSI a initié et mis en œuvre le premier Salon de l’Orientation afin d’apporter cet accompagnement de proximité aux futurs bacheliers à travers une caravane qui fait le tour des 7 capitales régionales du pays afin d’informer et de sensibiliser la cible sur le processus d’orientation via la plateforme ParcourSup Guinée.\nAvec plus de 1000 établissements du pré-universitaire touchés et près de 1 000 000 d’élèves atteints pendant les quatre dernière éditions à travers le pays, le Salon De l'Orientation est une occasion unique pour les élèves de découvrir les possibilités d'études et de carrière qui s'offrent à eux. Il constitue un outil fort pour aider nos apprenants à prendre des décisions éclairées concernant leur avenir professionnel. L'événement offre également aux participants l'occasion de rencontrer des professionnels et des représentants des établissements d'enseignement supérieur, et de leur poser des questions sur leurs domaines d'études et leurs programmes. Un accent est mis sur l’usage de la plateforme ParcourSup Guinée et les STEM dans cet évènement.\nAu cours de ces évènements, des Journées Portes Ouvertes (JPO) sur les Institutions publiques d’Enseignement Supérieur du pays sont organisées à l’intention des futurs bacheliers. Pendant ces journées, des conférences, des visites guidées, des travaux pratiques, des ateliers, masterclass sont tenus par les Ambassadeurs De Reformes. En plus de ces Journées Portes Ouvertes, une vaste campagne de sensibilisation et d’information des futurs bacheliers sur le choix des programmes d’enseignement et des métiers qui en découlent est organisée dans des établissements scolaires de trente-huit (33) préfectures du pays et les treize (13) communes de Conakry.\nIl faut noter que les masterclass sont organisées exclusivement pour les filles afin de les inciter à s’orienter et se maintenir dans les programmes des STEM mais aussi pour informer les futurs bacheliers, étudiants et enseignants-chercheurs des différentes réformes en cours. Nous envisageons de renforcer les capacités des gestionnaires des centres d’appui aux filles pour leur orientation dans les STEM."
+    },
+    "metadata": {
+      "categorie": "presentation",
+      "sujet_lie": "salon_orientation"
+    }
+  },
+  {
+    "id": "objectifs_du_salon_de_l_orientation_sdo",
+    "source": "guide_orientation",
+    "titre": "Objectifs du Salon de l'Orientation (SDO)",
+    "contenu": {
+      "texte": "OBJECTIFS DE LA MISSION\nObjectif général\nPour ces différentes éditions du SDO, l’objectif est d'informer et de sensibiliser directement les futurs bacheliers de tous les établissements d’enseignement du secondaire sur le processus d’orientation mais aussi d’affiner leur projet d’orientation en adéquation avec leur choix de carrière professionnelle.\nObjectifs spécifiques\nPlus spécifiquement, il s’agit de :\nOrganiser des Journées Portes Ouvertes sur les IES ;\nOrganiser des Master class ;\nOrganiser la caravane de sensibilisation des futurs bacheliers dans les collèges et lycées du pays ;\nPrésenter la plateforme ParcourSup Guinée ;\nExpliquer les différentes phases de l’orientation via ParcourSup Guinée ;\nIdentifier les erreurs à éviter lors de l’orientation ;\nPrésenter les Institutions d’Enseignement Supérieur, les programmes et les débouchés ;\nExpliquer les concepts orientation Scolaire et Universitaire ;\nExpliquer le lien entre le choix du profil au lycée et le projet professionnel ;\nFaciliter aux élèves le choix de leur projet professionnel ;\nExpliquer le processus de choix de programme en rapport avec le projet professionnel ;\nInciter les filles à s’orienter dans les STEM ;\nRenforcer les compétences (ParcourSup Guinée) des clubs et agents responsables des centres d’aide aux filles voulant évoluer dans les STEM ;\nMettre en relation les Ambassadeurs Des Réformes (ADR) avec les futurs bacheliers, les étudiants, les Enseignants Chercheurs, chercheurs, et les parents d’élèves pour leurs permettre de s’informer et de comprendre les différentes réformes réalisés et encours de réalisations au MESRSI ;\nExpliquer les conditions d’accès dans certains programmes (ingénieries, FSTS, Sciences Juridiques, ISIC, CPGE, IST, ISMG)"
+    },
+    "metadata": {
+      "categorie": "objectifs",
+      "sujet_lie": "salon_orientation"
+    }
+  },
+  {
+    "id": "public_cible_du_salon_de_l_orientation",
+    "source": "guide_orientation",
+    "titre": "Public cible du Salon de l'Orientation",
+    "contenu": {
+      "texte": "Le Salon De l’Orientation cible :\nÉlèves\nÉtudiants\nEnseignants et enseignants-chercheurs\nParents d’élèves\nAdministrations scolaires et universitaires\nEntreprises"
+    },
+    "metadata": {
+      "categorie": "cibles",
+      "sujet_lie": "salon_orientation"
+    }
+  },
+  {
+    "id": "modalites_d_execution_du_salon_de_l_orientation",
+    "source": "guide_orientation",
+    "titre": "Modalités d'exécution du Salon de l'Orientation",
+    "contenu": {
+      "texte": "Le Salon De l’Orientation se déroule simultanément en trois (3) phases.\nPremière phase : elle consiste aux journées portes ouvertes sur les IES. Ces journées offriront aux visiteurs l’occasion de découvrir les IES, les programmes et les finalités de la formation. Lors de ces journées se tiendront des ateliers et des conférences sur des thématiques bien définies et animés par des professionnels. Des masterclass sont tenues par des dames qui ont pu embrasser et se faire de la place dans les domaines des STEM. La première masterclass est tenue lors des cérémonies de lancement officiel du SDO qui se tient dans l’une des Institutions d’Enseignement Supérieur. Des visites guidées dans les laboratoires, salles informatiques et multimédias ainsi que des stands seront organisées.\nLa deuxième masterclass est tenue par un haut cadre du MESRSI qui anime une conférence autour des différentes réformes en cours et leurs avantages sur le système de l’enseignement supérieur avec ses acteurs.\nToutes ces activités vont concourir à donner aux futurs bacheliers l’ensemble des informations et outils nécessaires pour prendre une décision éclairée concernant leurs études et leurs carrières.\nLes ateliers de formation permettent d’outiller d’avantage les Clubs ParcourSup Guinée de techniques innovantes en vue d’accompagner facilement et massivement les bacheliers de leurs régions avant, pendant et après le processus d’orientation.\nDeuxième phase : cette deuxième est consacrée à la campagne de masse d’information et de sensibilisation des futurs bacheliers sur le processus d’orientation mais aussi sur les réformes réalisées et en cours de réalisation. Lors de cette phase, qui va toucher des écoles de 33 préfectures, 323 sous-préfectures du pays et les 13 communes de Conakry, nos équipes partent à la rencontre des futurs bacheliers dans les différentes préfectures, sous-préfectures et écoles ciblées afin d’y passer le message. L’avantage du Salon De l’Orientation en termes de mobilisation réside dans le fait que la caravane sillonne tout le pays afin de toucher les localités non encore couvertes par les précédentes éditions.\nTroisième phase : elle consiste à faire intervenir les hauts cadres de l’enseignement supérieur en vue d’expliquer les différentes réformes en cours, leur impact sur le choix académique, professionnel des futurs bacheliers et sur le système d’enseignement supérieur.\nAinsi, nous envisageons de mettre en place le concept d’Ambassadeurs Des Réformes (ADR) qui auront pour rôle : diffuser les informations par rapport aux différentes réformes du Ministère de l’Enseignement Supérieur de la Recherche Scientifique et de l’Innovation.\nL’ensemble de ces activités sont appuyées par des supports tels que des dépliants et spots pédagogiques afin de faciliter la compréhension des élèves, étudiants, du personnel d’encadrement et des agents techniques de ParcourSup Guinée.\nAujourd’hui, il faut noter que dans la vie pratique, il y’a des corps de métier liés à certains programmes et quelques fois à certaines IES qui sont stigmatisés par une majeure partie de notre société (les programmes de l’ISSEG, de ISAMK, ISAV, ISSMV, UZ,…). Il y’a aussi de bons programmes mais vu qu’ils sont développés dans des IES se situant à l’intérieur du pays, ne font pas l’objet de convoitise. C’est pourquoi, nous mettons à contribution les ADR qui sont les hauts cadres de l’enseignement supérieur pour communiquer sur les réformes engagées au niveau de ces IES.\nVu l’engouement suscité pour ces centres au niveau des jeunes filles des collèges et lycées, il serait important pour atteindre l’objectif 40% de filles dans les programmes de STEM, d’augmenter la capacité opérationnelle des Centres d’Aide aux Filles voulant évoluer dans les STIM (Kankan, Nzérékoré, Labé et Kindia). Pour plus d’équité, nous envisageons aussi l’ouverture de quatre (4) nouveaux centres à Faranah, Boké, Mamou et Conakry."
+    },
+    "metadata": {
+      "categorie": "modalites",
+      "sujet_lie": "salon_orientation"
+    }
+  },
+  {
+    "id": "historique_des_editions_du_salon_de_l_orientation",
+    "source": "guide_orientation",
+    "titre": "Historique des éditions du Salon de l'Orientation",
+    "contenu": {
+      "texte": "Durée d’exécution des différentes éditions du SDO\nDepuis son lancement, le Salon de l’Orientation (SDO) s’est imposé comme un cadre privilégié d’information, d’accompagnement et d’échanges autour des enjeux de l’orientation scolaire, universitaire et professionnelle. Les différentes éditions organisées à ce jour se déclinent comme suit :"
+    },
+    "metadata": {
+      "categorie": "editions",
+      "sujet_lie": "editions_sdo"
+    }
+  },
+  {
+    "id": "sdo_premiere_edition_2022",
+    "source": "guide_orientation",
+    "titre": "SDO — Première édition (2022)",
+    "contenu": {
+      "texte": "Première édition (2022) Thème : « SDO, votre avenir commence ici » Période d’exécution : du 08 au 24 mai 2022."
+    },
+    "metadata": {
+      "categorie": "editions",
+      "sujet_lie": "editions_sdo"
+    }
+  },
+  {
+    "id": "sdo_deuxieme_edition_2023",
+    "source": "guide_orientation",
+    "titre": "SDO — Deuxième édition (2023)",
+    "contenu": {
+      "texte": "Deuxième édition (2023) Thème : « Mes études supérieures, mon projet de vie » Période d’exécution : du 02 au 24 mai 2023."
+    },
+    "metadata": {
+      "categorie": "editions",
+      "sujet_lie": "editions_sdo"
+    }
+  },
+  {
+    "id": "sdo_troisieme_edition_2024",
+    "source": "guide_orientation",
+    "titre": "SDO — Troisième édition (2024)",
+    "contenu": {
+      "texte": "Troisième édition (2024) Thème : « Orientation scolaire et universitaire : quel impact sur ma carrière professionnelle ? » Période d’exécution : du 08 mai au 11 juin 2024."
+    },
+    "metadata": {
+      "categorie": "editions",
+      "sujet_lie": "editions_sdo"
+    }
+  },
+  {
+    "id": "sdo_quatrieme_edition_2026",
+    "source": "guide_orientation",
+    "titre": "SDO — Quatrième édition (2026)",
+    "contenu": {
+      "texte": "Quatrième édition (2026) Thème : « Gouvernance des compétences et employabilité des jeunes : face au défi du programme Simandou 2040 » Période d’exécution : du 09 au 23 mai 2026."
+    },
+    "metadata": {
+      "categorie": "editions",
+      "sujet_lie": "editions_sdo"
+    }
+  },
+  {
+    "id": "evolution_thematique_des_editions_du_sdo",
+    "source": "guide_orientation",
+    "titre": "Évolution thématique des éditions du SDO",
+    "contenu": {
+      "texte": "Au cours de ses quatre éditions, le SDO a progressivement élargi son champ de réflexion en abordant des thématiques stratégiques liées à l’orientation, à la réussite académique, à l’insertion socioprofessionnelle des jeunes et à l’adéquation entre la formation et les besoins du marché du travail. Cette évolution témoigne de la volonté des organisateurs de faire du Salon un espace de référence pour l’accompagnement des apprenants dans la construction de leur parcours académique et professionnel, tout en répondant aux priorités de développement national."
+    },
+    "metadata": {
+      "categorie": "editions",
+      "sujet_lie": "editions_sdo"
+    }
+  },
+  {
+    "id": "contexte_et_justification_campagne_d_orientation_2026",
+    "source": "guide_orientation",
+    "titre": "Contexte et justification — Campagne d'orientation 2026",
+    "contenu": {
+      "texte": "La vision Simandou 2040, dans son pilier consacré à l’Éducation, à la Culture et au Développement du Capital Humain, traduit l’ambition de bâtir une Guinée moderne, compétitive et souveraine, disposant de ressources humaines qualifiées et capables d’accompagner durablement la transformation structurelle de l’économie nationale.\nDans ce contexte, l’orientation des nouveaux bacheliers constitue un enjeu majeur de politique publique. Elle ne se limite pas à une simple opération administrative d’affectation dans les établissements d’enseignement supérieur ; elle représente un instrument stratégique de planification et de développement du capital humain. Elle contribue à la promotion de l’égalité des chances, à l’amélioration de l’employabilité des jeunes et à la mise à disposition des compétences nécessaires à la réalisation des priorités nationales.\nL’orientation doit permettre à chaque bachelier de construire un parcours de formation cohérent avec ses aptitudes, ses aspirations et ses perspectives professionnelles, tout en tenant compte des besoins du marché du travail, des capacités d’accueil des établissements et des orientations économiques et sociales du pays. Elle doit également favoriser les filières prioritaires et porteuses d’emplois, notamment dans les domaines des sciences, des technologies, de l’ingénierie et des mathématiques (STIM), des mines, de l’agriculture, de l’énergie, du numérique, des infrastructures, de la santé, de l’environnement, de l’industrie et des services.\nC’est dans cette dynamique que le Ministère de l’Enseignement Supérieur et de la Recherche Scientifique (MESRS) a mis en place la plateforme intégrée ParcourSup Guinée, afin de dématérialiser, moderniser et sécuriser le processus d’orientation. Cet outil permet aux bacheliers d’accéder aux informations relatives aux établissements et aux programmes de formation, de consulter les conditions d’admission, de formuler leurs choix et de suivre leur dossier dans un environnement numérique transparent, équitable, sécurisé et accessible.\nLa session d’orientation 2026 intervient dans un contexte marqué par la mise en œuvre des projets structurants MPS-30 et MPS-32, visant respectivement à améliorer la connaissance des besoins en compétences, la cartographie des offres de formation et le suivi de l’insertion professionnelle des diplômés, ainsi qu’à réformer cent cinquante-trois (153) programmes de Licence, d’Ingénierie et de Master selon l’Approche Par Compétences (APC), conformément au système Licence-Master-Doctorat (LMD).\nAfin de garantir une égalité effective des chances et de répondre aux difficultés liées à l’accès à l’information, à la compréhension des offres de formation et à l’utilisation des outils numériques, le MESRS déploie des dispositifs d’information, de sensibilisation et d’accompagnement de proximité, notamment le Salon De l’Orientation (SDO), les Centres d’Aide aux Filles souhaitant évoluer dans les filières STIM, le Centre d’appel, les Clubs ParcourSup Guinée et les services de support technique."
+    },
+    "metadata": {
+      "categorie": "contexte",
+      "sujet_lie": "orientation_2026"
+    }
+  },
+  {
+    "id": "objectif_general_campagne_d_orientation_2026",
+    "source": "guide_orientation",
+    "titre": "Objectif général — Campagne d'orientation 2026",
+    "contenu": {
+      "texte": "2.1. Objectif général\nL’objectif général de la mission est d’assurer la préparation, la mise en œuvre, le suivi et l’évaluation de la campagne d’orientation des bacheliers, session 2026, à travers la plateforme intégrée ParcourSup Guinée, afin de garantir un processus fiable, transparent, équitable, inclusif, sécurisé et adapté aux priorités nationales de développement."
+    },
+    "metadata": {
+      "categorie": "objectifs",
+      "sujet_lie": "orientation_2026"
+    }
+  },
+  {
+    "id": "objectifs_specifiques_campagne_d_orientation_2026",
+    "source": "guide_orientation",
+    "titre": "Objectifs spécifiques — Campagne d'orientation 2026",
+    "contenu": {
+      "texte": "2.2. Objectifs spécifiques\nInformer, sensibiliser et accompagner les bacheliers tout au long du processus d’orientation, notamment à travers les campagnes de communication, le Centre d’appel, les Clubs ParcourSup Guinée et les autres dispositifs d’assistance de proximité ;\nIdentifier, former, équiper et déployer les équipes techniques et les agents chargés de l’assistance, afin d’assurer une prise en charge efficace des préoccupations des bacheliers et le bon fonctionnement des dispositifs d’accompagnement ;\nAssurer le suivi du parcours post-orientation et évaluer la campagne d’orientation, notamment à travers l’inscription, la réinscription, le suivi académique des étudiants, la production d’un rapport technique et la formulation de recommandations pour les sessions futures."
+    },
+    "metadata": {
+      "categorie": "objectifs",
+      "sujet_lie": "orientation_2026"
+    }
+  },
+  {
+    "id": "resultats_attendus_campagne_d_orientation_2026",
+    "source": "guide_orientation",
+    "titre": "Résultats attendus — Campagne d'orientation 2026",
+    "contenu": {
+      "texte": "Les bacheliers sont suffisamment informés, sensibilisés et accompagnés tout au long du processus d’orientation, grâce à la campagne de communication, au Centre d’appel, aux Clubs ParcourSup Guinée et aux autres dispositifs d’assistance et d’accompagnement de proximité ;\nLes équipes techniques et les agents chargés de l’assistance sont identifiés, formés, équipés et déployés, permettant une prise en charge efficace et rapide des préoccupations des bacheliers ainsi qu’un fonctionnement optimal des dispositifs d’accompagnement ;\nLe suivi des parcours post-orientation est assuré et la campagne d’orientation est évaluée, à travers le suivi des inscriptions, des réinscriptions et des parcours académiques des étudiants, la production d’un rapport technique et la formulation de recommandations en vue de l’amélioration continue des prochaines sessions."
+    },
+    "metadata": {
+      "categorie": "resultats_attendus",
+      "sujet_lie": "orientation_2026"
+    }
+  },
+  {
+    "id": "activites_principales_campagne_d_orientation_2026",
+    "source": "guide_orientation",
+    "titre": "Activités principales — Campagne d'orientation 2026",
+    "contenu": {
+      "texte": "4.3. Communication, information et sensibilisation\nÉlaborer un plan national de communication ;\nProduire et diffuser les supports d’information ;\nOrganiser des campagnes de sensibilisation dans les médias et sur les plateformes numériques ;\nOrganiser le Salon de l’Orientation ;\nInformer les bacheliers sur les programmes, les critères et les débouchés ;\nPromouvoir les filières prioritaires et les domaines stratégiques ;\nSensibiliser les jeunes filles à l’accès aux filières STIM.\n4.4. Accompagnement et assistance\nMettre en place le Centre d’appel ;\nIdentifier et former les opérateurs ;\nMettre à jour et équiper les Clubs ParcourSup Guinée ;\nFormer les animateurs des Clubs ;\nAssurer une assistance technique et administrative ;\nTraiter et suivre les préoccupations des bacheliers ;\nMettre en place un mécanisme de gestion et d’escalade des incidents."
+    },
+    "metadata": {
+      "categorie": "activites",
+      "sujet_lie": "orientation_2026"
+    }
+  },
+  {
+    "id": "modalites_d_execution_campagne_d_orientation_2026",
+    "source": "guide_orientation",
+    "titre": "Modalités d'exécution — Campagne d'orientation 2026",
+    "contenu": {
+      "texte": "La campagne d’orientation des bacheliers est mise en œuvre à travers une organisation coordonnée reposant sur les structures et dispositifs suivants :\nLa Commission nationale d’orientation ;\nL’Équipe technique ParcourSup Guinée ;\nLa Commission communication, information et sensibilisation ;\nLe Centre d’appel ;\nLes Clubs ParcourSup Guinée ;\nCes structures travailleront en synergie sous la coordination du SMSI, conformément au chronogramme opérationnel établi."
+    },
+    "metadata": {
+      "categorie": "modalites",
+      "sujet_lie": "orientation_2026"
+    }
+  },
+  {
+    "id": "duree_de_la_mission_campagne_d_orientation_2026",
+    "source": "guide_orientation",
+    "titre": "Durée de la mission — Campagne d'orientation 2026",
+    "contenu": {
+      "texte": "La mission couvrira la période allant de la phase préparatoire à la clôture de la campagne d’orientation, y compris le suivi des inscriptions, la gestion des réclamations et l’élaboration du rapport final.\nUn chronogramme détaillé est élaboré et validé par les structures compétentes du MESRS."
+    },
+    "metadata": {
+      "categorie": "duree",
+      "sujet_lie": "orientation_2026"
+    }
+  },
+  {
+    "id": "processus_operationnel_etape_1_communication_et_sensibilisation",
+    "source": "guide_orientation",
+    "titre": "Processus opérationnel — Étape 1 : Communication et sensibilisation",
+    "contenu": {
+      "texte": "Lancement de la campagne nationale ;\nDiffusion des informations sur les critères et les procédures ;\nSensibilisation sur les filières prioritaires et les débouchés."
+    },
+    "metadata": {
+      "categorie": "procedure",
+      "sujet_lie": "processus_operationnel_2026"
+    }
+  },
+  {
+    "id": "processus_operationnel_etape_2_mise_en_place_des_dispositifs_dassistance",
+    "source": "guide_orientation",
+    "titre": "Processus opérationnel — Étape 2 : Mise en place des dispositifs d’assistance",
+    "contenu": {
+      "texte": "Identification et formation des opérateurs ;\nMise en place du Centre d’appel ;\nMise à jour et déploiement des Clubs ParcourSup Guinée ;\nMise en place des Centres d’Aide aux Filles dans les STIM."
+    },
+    "metadata": {
+      "categorie": "procedure",
+      "sujet_lie": "processus_operationnel_2026"
+    }
+  },
+  {
+    "id": "processus_operationnel_etape_3_ouverture_de_la_plateforme",
+    "source": "guide_orientation",
+    "titre": "Processus opérationnel — Étape 3 : Ouverture de la plateforme",
+    "contenu": {
+      "texte": "Publication du calendrier ;\nOuverture officielle de ParcourSup Guinée ;\nActivation des services d’assistance."
+    },
+    "metadata": {
+      "categorie": "procedure",
+      "sujet_lie": "processus_operationnel_2026"
+    }
+  },
+  {
+    "id": "processus_operationnel_phase_1_creation_des_comptes_et_formulation_des_choix",
+    "source": "guide_orientation",
+    "titre": "Processus opérationnel — Phase 1 : Création des comptes et formulation des choix",
+    "contenu": {
+      "texte": "Création et activation des comptes ;\nVérification des informations ;\nPaiement des frais d’orientation ;\nConsultation des offres de formation ;\nFormulation et validation des choix."
+    },
+    "metadata": {
+      "categorie": "procedure",
+      "sujet_lie": "processus_operationnel_2026"
+    }
+  },
+  {
+    "id": "processus_operationnel_phase_2_traitement_et_orientation",
+    "source": "guide_orientation",
+    "titre": "Processus opérationnel — Phase 2 : Traitement et orientation",
+    "contenu": {
+      "texte": "Vérification des conditions d’éligibilité ;\nApplication des critères d’orientation ;\nTraitement automatisé des choix ;\nContrôle et validation des résultats."
+    },
+    "metadata": {
+      "categorie": "procedure",
+      "sujet_lie": "processus_operationnel_2026"
+    }
+  },
+  {
+    "id": "processus_operationnel_phase_3_publication_et_notification",
+    "source": "guide_orientation",
+    "titre": "Processus opérationnel — Phase 3 : Publication et notification",
+    "contenu": {
+      "texte": "Publication des résultats ;\nNotification des bacheliers ;\nMise à disposition des informations relatives aux établissements d’accueil."
+    },
+    "metadata": {
+      "categorie": "procedure",
+      "sujet_lie": "processus_operationnel_2026"
+    }
+  },
+  {
+    "id": "processus_operationnel_phase_4_inscription_et_suivi_post_orientation",
+    "source": "guide_orientation",
+    "titre": "Processus opérationnel — Phase 4 : Inscription et suivi post-orientation",
+    "contenu": {
+      "texte": "Validation des orientations ;\nInscription dans les établissements ;\nIntégration dans les systèmes de gestion académique ;\nSuivi des parcours universitaires."
+    },
+    "metadata": {
+      "categorie": "procedure",
+      "sujet_lie": "processus_operationnel_2026"
+    }
+  },
+  {
+    "id": "processus_operationnel_phase_5_gestion_des_reclamations_et_des_cas_particuliers",
+    "source": "guide_orientation",
+    "titre": "Processus opérationnel — Phase 5 : Gestion des réclamations et des cas particuliers",
+    "contenu": {
+      "texte": "Réception et traitement des réclamations ;\nAnalyse des dossiers ;\nGestion des cas sociaux et particuliers ;\nPublication des décisions, conformément aux procédures en vigueur."
+    },
+    "metadata": {
+      "categorie": "procedure",
+      "sujet_lie": "processus_operationnel_2026"
+    }
+  },
+  {
+    "id": "introduction_au_guide_d_orientation",
+    "source": "guide_orientation",
+    "titre": "Introduction au guide d'orientation",
+    "contenu": {
+      "texte": "Dans un contexte où le choix de l’orientation des bacheliers dans les Institutions d’Enseignement Supérieur s’avère déterminant pour leur avenir académique et socio professionnel, de nombreux bacheliers se trouvent confrontés à diverses préoccupations. Conscient de cette situation, le Ministère de l’Enseignement Supérieur, de la Recherche Scientifique et de l’Innovation (MESRSI) met chaque année un guide de l’orientation à disposition pour expliquer aux bacheliers les différentes étapes du processus d’orientation.\nCe présent guide qui a pour objectif d’outiller et d’accompagner les bacheliers dans leurs processus d’orientation. Il permet également aux bacheliers d’éviter les erreurs tout au long du processus d’orientation dans les différentes IES.\nCe guide va passer en revus le concept de programme, licence, étudiant et l’ensemble du processus d’orientation en suivant les étapes ci-après :\nCréation d’un compte utilisateur ;\nPaiement des frais d’orientation ;\nChoix des Programmes ;\nNotification des résultats de l’orientation ;\nInscription et Réinscription."
+    },
+    "metadata": {
+      "categorie": "introduction",
+      "sujet_lie": "guide_orientation_general"
+    }
+  },
+  {
+    "id": "definition_qu_est_ce_qu_un_programme",
+    "source": "guide_orientation",
+    "titre": "Définition : qu'est-ce qu'un programme ?",
+    "contenu": {
+      "texte": "Un programme est un ensemble de cours qui permet aux étudiants d’apprendre dans un ou plusieurs domaines, et qui donne un diplôme ou une attestation à la fin du cycle."
+    },
+    "metadata": {
+      "categorie": "definition"
+    }
+  },
+  {
+    "id": "definition_qu_est_ce_qu_une_licence",
+    "source": "guide_orientation",
+    "titre": "Définition : qu'est-ce qu'une licence ?",
+    "contenu": {
+      "texte": "La licence est une formation de trois ans qui permet d’étudier un ou plusieurs domaines ou de se préparer à un métier. Chaque cours donne des points qu’on appelle crédits. Pour finir la licence, il faut avoir 180 crédits. Au moins 30 de ces crédits doivent venir de cours dans d’autres domaines.\nIl existe deux types de licence :\nLicence Fondamentale : la licence fondamentale est une formation proposée par les universités. Elle dure trois ans (six semestres) et permet d’obtenir 180 crédits si l’étudiant suit les cours à temps plein. Cette licence est surtout basée sur l’apprentissage théorique dans une matière bien précise.\nLicence Professionnelle : La licence professionnelle est une formation de trois ans proposés par les grandes écoles, les instituts supérieurs ou les universités. Elle se fait en six semestres et donne 180 crédits si l’étudiant suit les cours à temps plein. Cette licence combine les cours théoriques et une formation pratique pour préparer à un métier. Elle comprend aussi un stage en entreprise."
+    },
+    "metadata": {
+      "categorie": "definition"
+    }
+  },
+  {
+    "id": "definition_qu_est_ce_qu_un_etudiant",
+    "source": "guide_orientation",
+    "titre": "Définition : qu'est-ce qu'un étudiant ?",
+    "contenu": {
+      "texte": "Un(e) étudiant(e) est une personne qui a eu son baccalauréat et qui est inscrite dans une université, un institut supérieur ou une grande école pour suivre une formation afin d’obtenir un diplôme reconnu par l’État."
+    },
+    "metadata": {
+      "categorie": "definition"
+    }
+  },
+  {
+    "id": "erreurs_a_eviter_lors_du_choix_d_orientation",
+    "source": "guide_orientation",
+    "titre": "Erreurs à éviter lors du choix d'orientation",
+    "contenu": {
+      "texte": "Pour faire son choix, le bachelier doit éviter quelques erreurs majeures qui risquent de compromettre son avenir professionnel et/ou académique ; Il S'agit de :\nPasser par des intermédiaires pour se faire inscrire ;\nNe choisir que des IES de Conakry et environ ;\nUtiliser le numéro de téléphone ou l'adresse email d'une autre personne ;\nCommuniquer ses paramètres de connexion (INE, Mot de passe) à un tiers personne."
+    },
+    "metadata": {
+      "categorie": "erreurs_a_eviter"
+    }
+  },
+  {
+    "id": "creer_son_compte_sur_parcoursup_guinee",
+    "source": "guide_orientation",
+    "titre": "Créer son compte sur ParcourSup Guinée",
+    "contenu": {
+      "texte": "Connectez-vous sur www.parcoursupguinee.org et cliquez sur « Créer un Compte » pour une personne qui n’a pas de compte, « Se connecter » pour une personne ayant déjà un compte ;\nSaisir les informations personnelles (Prénoms, Nom, sexe et date de naissance (Jour/Mois/Année)) ;\nChoisir un mot de passe unique et personnel (minimum 8 caractères composés de lettres et chiffres) ;\nSaisir les informations du baccalauréat (option, session, PV, Préfecture/Commune d’obtention du BAC, lycée d’origine et centre d’examen) ;\nComplétez vos informations personnelles en saisissant l’adresse e-mail et votre numéro de téléphone ;\nCliquez sur Enregistrez.\nVous recevrez automatiquement par e-mail et SMS votre Identifiant National Etudiant (INE). Attention cet INE est à garder soigneusement.\nConnectez-vous à votre compte en utilisant l’INE reçu et le mot de passe saisi lors de la création du compte."
+    },
+    "metadata": {
+      "categorie": "guide_utilisation_plateforme",
+      "sujet_lie": "guide_utilisation_plateforme"
+    }
+  },
+  {
+    "id": "payer_les_frais_via_orange_money_sur_parcoursup_guinee",
+    "source": "guide_orientation",
+    "titre": "Payer les frais via Orange Money sur ParcourSup Guinée",
+    "contenu": {
+      "texte": "Cliquez sur l’onglet ORIENTATION pour accéder à votre dossier ensuite cliquez sur le lien PAYER puis sur le logo ORANGE MONEY.\nSaisissez votre numéro de téléphone dans la première case, ensuite à partir de votre téléphone Compose le *144*4*2*1* votre code secret # et validez. Vous recevrez automatiquement un message avec un code de paiement unique de 6 chiffres valable pendant 15 minutes. Entrez le code de paiement dans la deuxième case sur la plateforme et Confirmer.\nLa confirmation du paiement s'affichera une fois le traitement terminé et vous allez recevoir un SMS de confirmation de la transaction."
+    },
+    "metadata": {
+      "categorie": "guide_utilisation_plateforme",
+      "sujet_lie": "guide_utilisation_plateforme"
+    }
+  },
+  {
+    "id": "formuler_ses_choix_de_programmes_sur_parcoursup_guinee",
+    "source": "guide_orientation",
+    "titre": "Formuler ses choix de programmes sur ParcourSup Guinée",
+    "contenu": {
+      "texte": "Connectez-vous sur votre compte personnel et cliquez sur « ORIENTATION » ; Sélectionnez vos quinze (15) choix de programmes dans la liste à gauche ou en haut et faites-les glisser vers la liste des choix à droite ou en bas.\nClassez-les ensuite par priorité de haut en bas ;\nEnregistrez votre classement avec le bouton enregistrer en haut à gauche.\nNB : vous avez la possibilité de modifier votre classement autant de fois que nécessaire jusqu’à la date limite des orientations tout en enregistrant à chaque modification."
+    },
+    "metadata": {
+      "categorie": "guide_utilisation_plateforme",
+      "sujet_lie": "guide_utilisation_plateforme"
+    }
+  },
+  {
+    "id": "recevoir_sa_notification_d_orientation",
+    "source": "guide_orientation",
+    "titre": "Recevoir sa notification d'orientation",
+    "contenu": {
+      "texte": "Quand les résultats des orientations seront disponibles, vous recevrez un SMS et un e-mail avec le programme et l’université dans laquelle vous avez été orienté."
+    },
+    "metadata": {
+      "categorie": "guide_utilisation_plateforme",
+      "sujet_lie": "guide_utilisation_plateforme"
+    }
+  },
+  {
+    "id": "s_inscrire_ou_se_reinscrire_apres_orientation",
+    "source": "guide_orientation",
+    "titre": "S'inscrire ou se réinscrire après orientation",
+    "contenu": {
+      "texte": "Tous les étudiants doivent obligatoirement s’inscrire ou se réinscrire sur la plateforme ParcourSup Guinée en cliquant sur le bouton ajouter inscription puis en payant les frais d’inscription sur la plateforme.\nGuide du bachelier"
+    },
+    "metadata": {
+      "categorie": "guide_utilisation_plateforme",
+      "sujet_lie": "guide_utilisation_plateforme"
+    }
+  },
+  {
+    "id": "assistance_operateur_acces_a_la_plateforme",
+    "source": "guide_orientation",
+    "titre": "Assistance opérateur — Accès à la Plateforme ",
+    "contenu": {
+      "texte": "Demander à la personne s’il a le bon lien du site\nSi oui, qu’il vérifie la connexion tout en regardant s’il n’a pas un VPN installé dans son téléphone.\nSi non, communiquer le lien suivant : www.parcoursupguinee.org\nINE non reçu : Vérifier les informations du candidat tout en lui posant des questions sur l’ensemble des informations se trouvant sur la plateforme d’orientation et voir si le candidat a fourni le bon numéro de téléphone.\nSi oui, communiquer où renvoyer l’INE du candidat.\nSi Non, referez-vous à un agent technique pour modifier l’information."
+    },
+    "metadata": {
+      "categorie": "guide_operateurs",
+      "sujet_lie": "guide_operateurs_agents"
+    }
+  },
+  {
+    "id": "assistance_operateur_centre_dexamen",
+    "source": "guide_orientation",
+    "titre": "Assistance opérateur — Centre d’Examen ",
+    "contenu": {
+      "texte": "Vérifier les informations du candidat tout en lui posant des questions sur l’ensemble des informations se trouvant sur la plateforme d’orientation.\nSi les informations sont identiques à celle transmise par le candidat, renvoyez le vers la Direction Générale des Examens et Concours Scolaires (DGECS à INRAP) pour correction et tout en fournissant une note rectificative après le processus ;\nSinon ramener le problème vers l’équipe technique pour correction."
+    },
+    "metadata": {
+      "categorie": "guide_operateurs",
+      "sujet_lie": "guide_operateurs_agents"
+    }
+  },
+  {
+    "id": "assistance_operateur_difficulte_dacceder_au_choix_des_programmes",
+    "source": "guide_orientation",
+    "titre": "Assistance opérateur — Difficulté d’accéder au choix des programmes ",
+    "contenu": {
+      "texte": "Vérifier si le candidat a bien effectué son paiement avec réussite ;\nVérifier la connexion internet."
+    },
+    "metadata": {
+      "categorie": "guide_operateurs",
+      "sujet_lie": "guide_operateurs_agents"
+    }
+  },
+  {
+    "id": "assistance_operateur_ecole_dorigine",
+    "source": "guide_orientation",
+    "titre": "Assistance opérateur — Ecole d’origine ",
+    "contenu": {
+      "texte": "Vérifier les informations du candidat tout en lui posant des questions sur l’ensemble des informations se trouvant sur la plateforme d’orientation ;\nSi les informations sont identiques à celle transmise par le candidat, renvoyez le vers la Direction Générale des Examens et Concours Scolaires (DGECS à INRAP) pour correction et tout en fournissant une note rectificative après le processus.\nSi non, ramener le vers l’équipe technique."
+    },
+    "metadata": {
+      "categorie": "guide_operateurs",
+      "sujet_lie": "guide_operateurs_agents"
+    }
+  },
+  {
+    "id": "assistance_operateur_erreur_de_date_de_naissance",
+    "source": "guide_orientation",
+    "titre": "Assistance opérateur — Erreur de date de naissance ",
+    "contenu": {
+      "texte": "Vérifier les informations du candidat tout en lui posant des questions sur l’ensemble des informations se trouvant sur la plateforme d’orientation ;\nSi erreur orienter le vers l’équipe technique."
+    },
+    "metadata": {
+      "categorie": "guide_operateurs",
+      "sujet_lie": "guide_operateurs_agents"
+    }
+  },
+  {
+    "id": "assistance_operateur_erreur_de_prenom",
+    "source": "guide_orientation",
+    "titre": "Assistance opérateur — Erreur de Prénom ",
+    "contenu": {
+      "texte": "Vérifier les informations du candidat tout en lui posant des questions sur l’ensemble des informations se trouvant sur la plateforme d’orientation ;\nSi erreur Orienté la personne vers la Direction Général des Examen et Concours Scolaire (DGECS) pour la correction et tout en fournissant une note rectificative après le processus."
+    },
+    "metadata": {
+      "categorie": "guide_operateurs",
+      "sujet_lie": "guide_operateurs_agents"
+    }
+  },
+  {
+    "id": "assistance_operateur_erreur_sur_la_modalite_sexe",
+    "source": "guide_orientation",
+    "titre": "Assistance opérateur — Erreur sur la modalité sexe ",
+    "contenu": {
+      "texte": "Vérifier les informations du candidat tout en lui posant des questions sur l’ensemble des informations se trouvant sur la plateforme d’orientation ;\nSi erreur, orienté la personne vers la Direction Général des Examen et Concours Scolaire (DGECS) pour la correction et tout en fournissant une note rectificative après le processus."
+    },
+    "metadata": {
+      "categorie": "guide_operateurs",
+      "sujet_lie": "guide_operateurs_agents"
+    }
+  },
+  {
+    "id": "assistance_operateur_faux_pv",
+    "source": "guide_orientation",
+    "titre": "Assistance opérateur — Faux PV ",
+    "contenu": {
+      "texte": "Vérifier les informations du candidat tout en lui posant des questions sur l’ensemble des informations se trouvant sur la plateforme d’orientation ;\nSi Faux, rediriger l’appel vers l’équipe technique pour plus d’informations voire Convocation du bachelier."
+    },
+    "metadata": {
+      "categorie": "guide_operateurs",
+      "sujet_lie": "guide_operateurs_agents"
+    }
+  },
+  {
+    "id": "assistance_operateur_erreur_de_filiation",
+    "source": "guide_orientation",
+    "titre": "Assistance opérateur — Erreur de Filiation ",
+    "contenu": {
+      "texte": "Vérifier les informations du candidat tout en lui posant des questions sur l’ensemble des informations se trouvant sur la plateforme d’orientation ;\nSi erreur, orienté la personne vers la Direction Générale des Examen et Concours Scolaire (DGECS) pour la correction et tout en fournissant une note rectificative après le processus."
+    },
+    "metadata": {
+      "categorie": "guide_operateurs",
+      "sujet_lie": "guide_operateurs_agents"
+    }
+  },
+  {
+    "id": "assistance_operateur_modification_de_contact",
+    "source": "guide_orientation",
+    "titre": "Assistance opérateur — Modification de contact ",
+    "contenu": {
+      "texte": "Vérifier les informations du candidat tout en lui posant des questions sur l’ensemble des informations se trouvant sur la plateforme d’orientation ;\nSi erreur, consulter l’équipe technique pour modification des informations."
+    },
+    "metadata": {
+      "categorie": "guide_operateurs",
+      "sujet_lie": "guide_operateurs_agents"
+    }
+  },
+  {
+    "id": "assistance_operateur_mot_de_passe_oublie",
+    "source": "guide_orientation",
+    "titre": "Assistance opérateur — Mot de passe oublié ",
+    "contenu": {
+      "texte": "Procédure de récupération de mot de passe\nCliquer sur : Accès ParcourSup Guinee\nSe connecter\nClique sur mot de passe oublié\nSélectionner l’option de récupération (SMS ou EMAIL)\nRenseigner votre INE, puis adresse email ou numéro de téléphone.\nPuis cliquer sur : Envoyer."
+    },
+    "metadata": {
+      "categorie": "guide_operateurs",
+      "sujet_lie": "guide_operateurs_agents"
+    }
+  },
+  {
+    "id": "assistance_operateur_expliquer_la_procedure_de_paiement",
+    "source": "guide_orientation",
+    "titre": "Assistance opérateur — Expliquer la procédure de paiement ",
+    "contenu": {
+      "texte": "Connectez-vous à votre compte ParcourSup Guinee ;\nDans Dossier Etudiant cliquer sur payer ;\nDéfiler vers le bas puis cliquer sur Orange Money ;\nPour obtenir sur la page de paiement Orange Money composer le *144*4*2* Ton code secret# et valide\nTu recevras un sms contenant le code de paiement\nTu as 15 minutes pour utiliser le code avant qu’il ne soit plus valable. Passé 15 minutes, tu devras recommencer l’étape 2.\nRenseigne ton numéro de téléphone et le code de paiement que tu viens de recevoir sur la plateforme puis valide ton paiement."
+    },
+    "metadata": {
+      "categorie": "guide_operateurs",
+      "sujet_lie": "guide_operateurs_agents"
+    }
+  },
+  {
+    "id": "assistance_operateur_prenom_et_nom_non_reconnus",
+    "source": "guide_orientation",
+    "titre": "Assistance opérateur — Prénom et Nom non Reconnus ",
+    "contenu": {
+      "texte": "Vérifier les informations du candidat tout en lui posant des questions sur l’ensemble des informations se trouvant sur la plateforme d’orientation ;\nSi erreur de format (Espace dans le nom/Nom et prénom coller), faire la correction en se référant à l’équipe technique pour modification.\nSi non erreur de format, orienté le candidat vers la Direction Générale des Examen et Concours Scolaire (DGECS) pour la correction et tout en fournissant une note rectificative après le processus."
+    },
+    "metadata": {
+      "categorie": "guide_operateurs",
+      "sujet_lie": "guide_operateurs_agents"
+    }
+  },
+  {
+    "id": "assistance_operateur_double_paiement",
+    "source": "guide_orientation",
+    "titre": "Assistance opérateur — Double Paiement ",
+    "contenu": {
+      "texte": "Vérifier le statut du paiement ;\nRediriger vers Orange."
+    },
+    "metadata": {
+      "categorie": "guide_operateurs",
+      "sujet_lie": "guide_operateurs_agents"
+    }
+  },
+  {
+    "id": "assistance_operateur_quelques_concepts",
+    "source": "guide_orientation",
+    "titre": "Assistance opérateur — Quelques concepts ",
+    "contenu": {
+      "texte": "A inscrire IES : attribué à un bachelier qui a reçu la notification mais pas encore inscrit dans son IES d’orientation.\nInscription IES à payer : attribué à un étudiant n’ayant pas fait d’inscription dans son IES d’orientation ;\nInscription IES en validation : attribué à un étudiant en attente de validation de l’inscription par l’IES d’orientation ;\nInscription IES validée : attribué à un étudiant dont l’inscription est validée par l’IES d’orientation ;\nInscription IES archivée : attribué à un étudiant voulant faire la double diplomation ;\nBoursier : tout étudiant officiellement orienté dans une institution d’enseignement supérieur, dans un programme défini et qui y suit régulièrement les cours sans perdre deux (2) fois l’année académique. Ensuite il a fait la biométrie.\n« Il est bénéficiaire de la bourse d’étude et d’entretien » ;\nNon Boursier : tout étudiant officiellement orienté dans un programme d’une institution ayant perdu au moins deux (2) ans dans le cycle universitaire. « Il bénéficie uniquement de la bourse d’étude »."
+    },
+    "metadata": {
+      "categorie": "guide_operateurs",
+      "sujet_lie": "guide_operateurs_agents"
+    }
+  },
+  {
+    "id": "orientation_des_bacheliers_diplomes_a_l_etranger_definition",
+    "source": "guide_orientation",
+    "titre": "Orientation des bacheliers diplômés à l'étranger — Définition",
+    "contenu": {
+      "texte": "Orientation des bacheliers titulaires d’un diplôme obtenu à l’étranger\nEst considéré comme bachelier étranger tout ressortissant guinéen ayant obtenu son diplôme du baccalauréat hors du territoire national et souhaitant poursuivre ses études dans l’une des institutions publiques d’enseignement supérieur de la République de Guinée.\nProcédure d’orientation"
+    },
+    "metadata": {
+      "categorie": "definition",
+      "sujet_lie": "orientation_bacheliers_etranger"
+    }
+  },
+  {
+    "id": "orientation_bachelier_etranger_etape_1_obtention_de_la_reconnaissance_et_de_lequivalence_du_diplome",
+    "source": "guide_orientation",
+    "titre": "Orientation bachelier étranger — Étape 1 : Obtention de la reconnaissance et de l’équivalence du diplôme",
+    "contenu": {
+      "texte": "Préalablement à toute demande d’orientation, le candidat doit faire reconnaître son diplôme de baccalauréat obtenu à l’étranger et solliciter son équivalence auprès des services compétents du Ministère de l’Enseignement supérieur, de la Recherche scientifique et de l’Innovation, à travers la Direction en charge de l’Enseignement supérieur."
+    },
+    "metadata": {
+      "categorie": "procedure",
+      "sujet_lie": "orientation_bacheliers_etranger"
+    }
+  },
+  {
+    "id": "orientation_bachelier_etranger_etape_2_constitution_du_dossier_dorientation",
+    "source": "guide_orientation",
+    "titre": "Orientation bachelier étranger — Étape 2 : Constitution du dossier d’orientation",
+    "contenu": {
+      "texte": "Une fois l’équivalence obtenue, le candidat est tenu de constituer un dossier d’orientation comprenant les pièces suivantes :\nUne demande manuscrite adressée à Monsieur/Madame le(la) Ministre de l’Enseignement supérieur et de la Recherche scientifique ;\nUne copie de l’extrait de naissance ou tout autre document officiel permettant d’établir le lien de nationalité ou d’appartenance du candidat à la République de Guinée ;\nUne copie de la pièce d’identité en cours de validité du candidat ;\nUne copie de l’acte ou de l’attestation d’équivalence du baccalauréat délivré(e) par l’autorité compétente.\nAprès vérification de sa conformité, le dossier est transmis aux services habilités du Ministère de l’Enseignement supérieur, de la Recherche scientifique et de l’Innovation pour examen et orientation du candidat vers l’établissement public d’enseignement supérieur correspondant à son profil académique et aux capacités d’accueil disponibles."
+    },
+    "metadata": {
+      "categorie": "procedure",
+      "sujet_lie": "orientation_bacheliers_etranger"
+    }
+  },
+  {
+    "id": "centres_appel_orientation",
+    "source": "guide_orientation",
+    "titre": "Contacts des centres d'appel d'orientation par ville",
+    "contenu": {
+      "contacts_par_ville": {
+        "Conakry": [
+          "620 576 894",
+          "621 767 344",
+          "624 453 965",
+          "628 169 561",
+          "629 981 369",
+          "620 332 585",
+          "610 325 142",
+          "611 921 894"
+        ],
+        "Kindia": [
+          "612 96 65 51"
+        ],
+        "N'Zérékoré": [
+          "627 275 787",
+          "626 259 323"
+        ],
+        "Faranah": [
+          "624 292 901"
+        ],
+        "Kankan": [
+          "624 485 454"
+        ],
+        "Labé": [
+          "612 332 146"
+        ],
+        "Mamou": [
+          "629 321 692"
+        ],
+        "Boké": [
+          "623 68 78 07"
+        ]
+      }
+    },
+    "metadata": {
+      "categorie": "contacts"
+    }
+  },
+  {
+    "id": "avertissement_important_inscription_parcoursup_guinee",
+    "source": "guide_orientation",
+    "titre": "Avertissement important — Inscription ParcourSup Guinée",
+    "contenu": {
+      "texte": "ATTENTION !!!\nL’inscription sur ParcourSup Guinée est une procédure administrative obligatoire pour tout bachelier voulant étudier dans les IES publiques."
+    },
+    "metadata": {
+      "categorie": "avertissement"
+    }
+  }
+]
