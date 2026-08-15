@@ -30,3 +30,9 @@ pip-delete-this-directory.txt
 
 # OS files
 .DS_Store
+# Base vectorielle locale
+chroma_db/
+
+# Cache Python
+__pycache__/
+*.pyc
