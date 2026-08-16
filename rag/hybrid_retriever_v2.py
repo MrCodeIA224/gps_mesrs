@@ -21,8 +21,10 @@ COLLECTION_NAME = "orientation_guinee"
 # ============================================================
 
 print("Chargement du modèle d'embedding...")
-model = SentenceTransformer(MODEL_NAME)
-
+model = SentenceTransformer(
+    MODEL_NAME,
+    device="cpu"
+)
 print("Connexion à ChromaDB...")
 client = chromadb.PersistentClient(path=str(CHROMA_DIR))
 collection = client.get_collection(name=COLLECTION_NAME)
