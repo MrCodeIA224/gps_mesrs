@@ -1,0 +1,236 @@
+[
+  {
+    "id": "etab_001",
+    "source": "guide_universites",
+    "titre": "Université Gamal Abdel Nasser de Conakry (UGANC)",
+    "contenu": {
+      "ies": "Université Gamal Abdel Nasser de Conakry (UGANC)",
+      "ville": "Conakry (Dixinn)",
+      "presentation": "L'Université Gamal Abdel Nasser de Conakry (UGANC) est un Établissement Public Administratif (EPA) placé sous la tutelle technique du Ministère de l'Enseignement Supérieur et de la Recherche Scientifique, et sous la tutelle financière du ministère chargé des Finances. C'est la plus ancienne et la plus grande université de Guinée : fondée en 1962 sous le nom d'Institut Polytechnique de Conakry avec l'appui de l'Union soviétique, elle a pris le nom d'Institut Polytechnique Gamal Abdel Nasser en 1970 puis son nom actuel en 1989, en hommage au président égyptien Gamal Abdel Nasser. Elle est structurée en plusieurs facultés et instituts couvrant un large éventail de domaines, de la licence au doctorat. Elle est implantée dans la commune de Dixinn, à Conakry."
+    },
+    "metadata": {
+      "categorie": "presentation_etablissement"
+    }
+  },
+  {
+    "id": "etab_002",
+    "source": "guide_universites",
+    "titre": "Université Générale Lansana Conté Sonfonia (UGLCS)",
+    "contenu": {
+      "ies": "Université Générale Lansana Conté Sonfonia (UGLCS)",
+      "ville": "Conakry (Sonfonia)",
+      "presentation": "L'Université Générale Lansana Conté de Sonfonia est un établissement public d'enseignement supérieur créé en 2005 (Arrêté n°2005/104/MESRS/CAB/DRH du 26 janvier 2005) sous le nom d'Université des Sciences Humaines, Juridiques et Économiques de Sonfonia-Conakry, avant d'être rebaptisée le 14 janvier 2006 en hommage à l'ancien président guinéen Lansana Conté. Elle est née de la décentralisation de l'UGANC, alors en situation de surpopulation étudiante : les facultés de Lettres, de Droit et de Sciences Économiques et de Gestion y ont été transférées pour constituer cette nouvelle université. Elle est placée sous la tutelle du Ministère de l'Enseignement Supérieur et est implantée dans le quartier de Sonfonia, à Conakry."
+    },
+    "metadata": {
+      "categorie": "presentation_etablissement"
+    }
+  },
+  {
+    "id": "etab_003",
+    "source": "guide_universites",
+    "titre": "Université Julius Nyerere de Kankan (UJNK)",
+    "contenu": {
+      "ies": "Université Julius Nyerere de Kankan (UJNK)",
+      "ville": "Kankan",
+      "presentation": "L'Université Julius Nyerere de Kankan (UJNK) est un établissement public administratif à caractère scientifique, placé sous la tutelle du Ministère de l'Enseignement Supérieur et de la Recherche Scientifique. Elle est née en 1964 sous le nom d'École Normale Secondaire, devenue École Normale Supérieure en 1966, puis Institut Polytechnique de Kankan avant d'être érigée en université le 27 septembre 1989 (Décret n°175/PRG/SGG/89). Elle porte le nom de Julius Nyerere, ancien président tanzanien, et constitue la deuxième plus importante institution universitaire du pays. Elle est implantée à Kankan, en Haute-Guinée."
+    },
+    "metadata": {
+      "categorie": "presentation_etablissement"
+    }
+  },
+  {
+    "id": "etab_004",
+    "source": "guide_universites",
+    "titre": "Institut Supérieur des Sciences et de Médecine Vétérinaire de Dalaba (ISSMV)",
+    "contenu": {
+      "ies": "Institut Supérieur des Sciences et de Médecine Vétérinaire de Dalaba (ISSMV)",
+      "ville": "Dalaba",
+      "presentation": "L'Institut Supérieur des Sciences et de Médecine Vétérinaire (ISSMV) de Dalaba est un établissement public à caractère scientifique, pédagogique, technique et professionnel, placé sous la tutelle du Ministère de l'Enseignement Supérieur et de la Recherche Scientifique. Créé par arrêté ministériel le 25 août 2004, il a ouvert ses portes en 2006. Sa mission est de former des docteurs vétérinaires ainsi que des ingénieurs spécialisés dans la technologie et le contrôle des produits animaux, les productions animales et les sciences halieutiques. Il est situé à Dalaba, dans le quartier de Tangama."
+    },
+    "metadata": {
+      "categorie": "presentation_etablissement"
+    }
+  },
+  {
+    "id": "etab_005",
+    "source": "guide_universites",
+    "titre": "Institut Supérieur d'Architecture et d'Urbanisme (ISAU)",
+    "contenu": {
+      "ies": "Institut Supérieur d'Architecture et d'Urbanisme (ISAU)",
+      "ville": "Conakry (Dixinn)",
+      "presentation": "L'Institut Supérieur d'Architecture et d'Urbanisme (ISAU) est un Établissement Public à caractère Scientifique placé sous la tutelle technique du Ministère de l'Enseignement Supérieur et de la Recherche Scientifique. Créé en 2004, il forme des architectes et urbanistes dans un pays où, en Afrique de l'Ouest, seule la Guinée dispose d'un tel institut en dehors du Togo. L'admission y est très sélective, réservée aux bacheliers de la filière scientifique ayant obtenu au moins 14 de moyenne. Il est implanté à Landréah, dans la commune de Dixinn à Conakry, à proximité du campus de l'UGANC."
+    },
+    "metadata": {
+      "categorie": "presentation_etablissement"
+    }
+  },
+  {
+    "id": "etab_006",
+    "source": "guide_universites",
+    "titre": "Institut Supérieur des Sciences de l'Éducation de Guinée (ISSEG)",
+    "contenu": {
+      "ies": "Institut Supérieur des Sciences de l'Éducation de Guinée (ISSEG)",
+      "ville": "Conakry (Lambanyi)",
+      "presentation": "L'Institut Supérieur des Sciences de l'Éducation de Guinée (ISSEG) est un établissement public d'enseignement supérieur à caractère scientifique et professionnel, affilié au Ministère de l'Enseignement Supérieur et de la Recherche Scientifique. Il est issu de l'ancienne École Normale Supérieure de Manéah/Coyah, créée en 1979, avant d'être délocalisé à Conakry-Lambanyi en 2003. Sa mission principale est la formation initiale et continue des professeurs de l'enseignement primaire et secondaire, ainsi que la recherche en sciences de l'éducation. Il est situé dans le quartier de Lambanyi, commune de Ratoma, à Conakry."
+    },
+    "metadata": {
+      "categorie": "presentation_etablissement"
+    }
+  },
+  {
+    "id": "etab_007",
+    "source": "guide_universites",
+    "titre": "Université de Labé (UL)",
+    "contenu": {
+      "ies": "Université de Labé (UL)",
+      "ville": "Labé (Hafia)",
+      "presentation": "L'Université de Labé est un établissement public d'enseignement supérieur placé sous la tutelle du Ministère de l'Enseignement Supérieur et de la Recherche Scientifique. Créée en 2001 comme centre universitaire rattaché aux facultés de l'UGANC, elle a acquis son statut d'université autonome le 21 octobre 2016 (Arrêté n°2016/6303/MESRS/CAB), en même temps que les centres universitaires de N'Zérékoré et de Kindia, dans le cadre de la politique de création des universités régionales d'excellence. Elle a été choisie pour porter un pôle d'excellence dans les sciences et les technologies innovantes. Son campus de 180 hectares est situé à Hafia, à environ 22 km de la ville de Labé."
+    },
+    "metadata": {
+      "categorie": "presentation_etablissement"
+    }
+  },
+  {
+    "id": "etab_008",
+    "source": "guide_universites",
+    "titre": "Institut Supérieur de l'Information et de la Communication (ISIC)",
+    "contenu": {
+      "ies": "Institut Supérieur de l'Information et de la Communication (ISIC)",
+      "ville": "Coyah (Kountia)",
+      "presentation": "L'Institut Supérieur de l'Information et de la Communication de Kountia (ISIC) est un établissement public d'enseignement supérieur placé sous la tutelle du Ministère de l'Enseignement Supérieur et de la Recherche Scientifique. Créé en 2006, il forme des journalistes et des professionnels de la communication, avec des filières telles que le journalisme de presse écrite, le journalisme audiovisuel et la communication institutionnelle. Il entretient des partenariats avec des médias et institutions guinéens et étrangers, dont l'ISIC de Rabat au Maroc. Il est implanté à Kountia, dans la préfecture de Coyah."
+    },
+    "metadata": {
+      "categorie": "presentation_etablissement"
+    }
+  },
+  {
+    "id": "etab_009",
+    "source": "guide_universites",
+    "titre": "Université de Kindia (UK)",
+    "contenu": {
+      "ies": "Université de Kindia (UK)",
+      "ville": "Kindia (Foulayah)",
+      "presentation": "L'Université de Kindia est un établissement d'enseignement public à caractère scientifique, pédagogique, technique et professionnel, placé sous la tutelle du Ministère de l'Enseignement Supérieur et de la Recherche Scientifique. Elle a d'abord existé sous forme d'École Préparatoire des Ingénieurs en 2004, puis de Centre Universitaire de Kindia en 2006, avant d'acquérir son statut d'université autonome le 21 octobre 2016 (Arrêté n°6303/MESRS/CAB), dans le cadre de la même politique de régionalisation que Labé et N'Zérékoré. Elle compte quatre facultés couvrant les sciences sociales, les langues et lettres, les sciences et les sciences économiques et de gestion. Elle est implantée à Foulayah, dans la sous-préfecture de Damakania (Kindia)."
+    },
+    "metadata": {
+      "categorie": "presentation_etablissement"
+    }
+  },
+  {
+    "id": "etab_010",
+    "source": "guide_universites",
+    "titre": "Institut Supérieur des Arts Mory Kanté (ISAMK)",
+    "contenu": {
+      "ies": "Institut Supérieur des Arts Mory Kanté (ISAMK)",
+      "ville": "Dubréka",
+      "presentation": "L'Institut Supérieur des Arts Mory Kanté (ISAMK) est un Établissement Public Autonome placé sous la tutelle du Ministère de l'Enseignement Supérieur et de la Recherche Scientifique. Fondé sous le nom d'Institut Supérieur des Arts de Guinée, il a été rebaptisé le 26 mai 2020 par décret présidentiel en hommage à l'artiste guinéen Mory Kanté. Il assure la formation et la recherche dans les domaines du cinéma, de l'art dramatique, de la musique, de la danse et des beaux-arts. Il est situé à Dubréka, à environ 48 km de Conakry."
+    },
+    "metadata": {
+      "categorie": "presentation_etablissement"
+    }
+  },
+  {
+    "id": "etab_011",
+    "source": "guide_universites",
+    "titre": "Université de N'Zérékoré (UZ)",
+    "contenu": {
+      "ies": "Université de N'Zérékoré (UZ)",
+      "ville": "N'Zérékoré",
+      "presentation": "L'Université de N'Zérékoré est un établissement public d'enseignement supérieur placé sous la tutelle du Ministère de l'Enseignement Supérieur et de la Recherche Scientifique. Créée en 1998 sous forme de Centre Universitaire, elle a pris le nom d'Université de N'Zérékoré le 5 septembre 2001 (décret n°3988/MESRS/CAB/DNE/UC/UK), en même temps que le centre de Labé, avant de devenir autonome le 21 octobre 2016. Elle compte deux facultés proposant des programmes en sciences de l'environnement et sciences technologiques. Elle est implantée à N'Zérékoré, au sud-est de la Guinée."
+    },
+    "metadata": {
+      "categorie": "presentation_etablissement"
+    }
+  },
+  {
+    "id": "etab_012",
+    "source": "guide_universites",
+    "titre": "Institut Supérieur des Mines et Géologie de Boké (ISMG)",
+    "contenu": {
+      "ies": "Institut Supérieur des Mines et Géologie de Boké (ISMG)",
+      "ville": "Boké",
+      "presentation": "L'Institut Supérieur des Mines et de la Géologie de Boké (ISMG) est un établissement public à caractère scientifique placé sous la tutelle du Ministère de l'Enseignement Supérieur et de la Recherche Scientifique. Il est né en 1962 comme faculté des mines et de la géologie au sein de l'Institut Polytechnique de Conakry, transféré à Boké en 1972, puis érigé en institut supérieur autonome en 1990. Il forme des techniciens, ingénieurs et chercheurs en sciences géologiques, génie minier, traitement des minerais et métallurgie, dans une région qui abrite l'une des plus importantes mines de bauxite d'Afrique de l'Ouest. Il est implanté à Tamakènè, dans la ville de Boké."
+    },
+    "metadata": {
+      "categorie": "presentation_etablissement"
+    }
+  },
+  {
+    "id": "etab_013",
+    "source": "guide_universites",
+    "titre": "Institut Supérieur de Technologie de Mamou (IST)",
+    "contenu": {
+      "ies": "Institut Supérieur de Technologie de Mamou (IST)",
+      "ville": "Mamou (Téliko)",
+      "presentation": "L'Institut Supérieur de Technologie de Mamou (IST-Mamou) est un établissement public d'enseignement supérieur placé sous la tutelle du Ministère de l'Enseignement Supérieur et de la Recherche Scientifique. Créé en 2004 dans le cadre de la politique de décentralisation de l'enseignement supérieur guinéen, il forme chaque année environ 200 ingénieurs dans des domaines tels que le génie informatique, la conception et fabrication mécanique, l'énergétique et les technologies biomédicales. Il délivre des diplômes du BTS à la licence, et dans certaines filières jusqu'au master. Il est situé à Téliko, à environ 4 km du centre-ville de Mamou."
+    },
+    "metadata": {
+      "categorie": "presentation_etablissement"
+    }
+  },
+  {
+    "id": "etab_014",
+    "source": "guide_universites",
+    "titre": "Université Numérique de Guinée (UNG)",
+    "contenu": {
+      "ies": "Université Numérique de Guinée (UNG)",
+      "ville": "Conakry — formation à distance",
+      "presentation": "L'Université Numérique de Guinée (UNG) est un Établissement Public à caractère Scientifique, doté de la personnalité juridique et placé sous la tutelle technique du Ministère de l'Enseignement Supérieur et de la Recherche Scientifique. Elle résulte de la transformation de l'ancien Institut Supérieur de Formation à Distance (ISFAD), officialisée par décret présidentiel fin juillet 2026, en application de la loi guinéenne relative au statut des institutions d'enseignement supérieur. Sa mission est de dispenser des formations universitaires à distance via une plateforme numérique, avec un accent sur les filières innovantes et l'accès élargi à l'enseignement supérieur. Elle s'adresse en particulier aux nouveaux bacheliers et à la formation continue."
+    },
+    "metadata": {
+      "categorie": "presentation_etablissement"
+    }
+  },
+  {
+    "id": "etab_015",
+    "source": "guide_universites",
+    "titre": "Institut Supérieur de Commerce et d'Administration des Entreprises en Guinée (ISCAEG)",
+    "contenu": {
+      "ies": "Institut Supérieur de Commerce et d'Administration des Entreprises en Guinée (ISCAEG)",
+      "ville": "Conakry",
+      "presentation": "L'Institut Supérieur de Commerce et d'Administration des Entreprises en Guinée (ISCAEG) est un établissement public d'enseignement supérieur de management. Il a été créé en mai 2002 dans le cadre d'une coopération Sud-Sud entre la Guinée et le Maroc, avec le soutien de l'ISCAE Maroc, sous protocole signé entre l'Agence Marocaine de Coopération Internationale et le Ministère guinéen de l'Enseignement Supérieur. Il est spécialisé dans le commerce, la gestion, la comptabilité, la finance et l'audit, et a obtenu son accréditation au système LMD en septembre 2017. Il est implanté à Conakry."
+    },
+    "metadata": {
+      "categorie": "presentation_etablissement"
+    }
+  },
+  {
+    "id": "etab_016",
+    "source": "guide_universites",
+    "titre": "École Supérieure du Tourisme et de l'Hôtellerie (ESTH)",
+    "contenu": {
+      "ies": "École Supérieure du Tourisme et de l'Hôtellerie (ESTH)",
+      "ville": "Conakry",
+      "presentation": "L'École Supérieure du Tourisme et de l'Hôtellerie (ESTH) est un établissement public à caractère scientifique relevant du Ministère de l'Enseignement Supérieur et de la Recherche Scientifique. Créée par arrêté le 25 septembre 2003, elle a obtenu son statut d'établissement public autonome le 18 octobre 2008. Elle forme des cadres supérieurs dans les domaines du tourisme, de l'hôtellerie et des sciences alimentaires et nutritionnelles. Depuis janvier 2024, elle est installée à Foulamadina Carrière, dans la commune de Sonfonia à Conakry."
+    },
+    "metadata": {
+      "categorie": "presentation_etablissement"
+    }
+  },
+  {
+    "id": "etab_017",
+    "source": "guide_universites",
+    "titre": "Institut Supérieur Agronomique et Vétérinaire de Faranah (ISAV)",
+    "contenu": {
+      "ies": "Institut Supérieur Agronomique et Vétérinaire de Faranah (ISAV)",
+      "ville": "Faranah",
+      "presentation": "L'Institut Supérieur Agronomique et Vétérinaire « Valéry Giscard d'Estaing » de Faranah (ISAV) est l'unique institution d'enseignement supérieur agronomique de Guinée. Son site a connu plusieurs transformations depuis l'École Normale Primaire de Faranah (1966), avant qu'une Faculté d'Agronomie n'y soit fondée en 1976, puis érigée en institut par décret présidentiel le 26 décembre 1978, lors d'une visite d'État du président français dont il porte le nom. Il forme des agronomes, vétérinaires et techniciens à travers sept départements, sous la tutelle du Ministère de l'Enseignement Supérieur. Il est implanté à Faranah, dans le quartier de Kora."
+    },
+    "metadata": {
+      "categorie": "presentation_etablissement"
+    }
+  },
+  {
+    "id": "etab_018",
+    "source": "guide_universites",
+    "titre": "Classes Préparatoires aux Grandes Écoles (CPGE)",
+    "contenu": {
+      "ies": "Classes Préparatoires aux Grandes Écoles (CPGE)",
+      "ville": "Dalaba",
+      "presentation": "Les Classes Préparatoires aux Grandes Écoles (CPGE) de Guinée constituent un établissement public relevant du Ministère de l'Enseignement Supérieur et de la Recherche Scientifique. Le projet, initié en 2017, a été concrétisé par la pose de la première pierre en mai 2023 et l'inauguration officielle le 5 juillet 2025 à Sébory, dans la préfecture de Dalaba — il s'agit des toutes premières classes préparatoires de l'histoire de la Guinée. Elles préparent, sur deux ans, les meilleurs bacheliers scientifiques (mention Assez Bien minimum) aux concours d'entrée dans les grandes écoles d'ingénieurs de Guinée, de Côte d'Ivoire, du Maroc et de France. Elles sont situées à Dalaba, en Moyenne-Guinée."
+    },
+    "metadata": {
+      "categorie": "presentation_etablissement"
+    }
+  }
+]
