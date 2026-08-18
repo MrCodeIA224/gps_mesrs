@@ -5,18 +5,24 @@ Lancer avec : streamlit run app.py
 Ordre d'orchestration à chaque message :
   1. Salutation ? -> réponse fixe immédiate, pas d'appel LLM (rapidité/fiabilité)
   2. Mémoire : reformulation de la question + résolution d'un menu proposé
-  3. Extraction des slots structurés (ville, profil bac...) pour usage futur
-  4. Retrieval : route "fait" (hybride+reranking) ou "liste" (filtrage structuré)
-  5. LLM : génération de la réponse avec le prompt système à 34 sections
-  6. Mémoire : masquage des données sensibles avant stockage, détection d'un
+  3. Retrieval : route fait/liste/hors-sujet/clarification -- ce SEUL appel
+     extrait aussi ville/profil/moyenne/projet/intention_metier (consolidé :
+     auparavant 3 appels séparés et redondants faisaient chacun leur propre
+     extraction similaire -- réduit ici à 1 seul, passant le total d'appels
+     par question de ~6-7 à ~4-5)
+  4. Mémoire : mise à jour des slots à partir des entités déjà extraites
+     (aucun appel API supplémentaire)
+  5. LLM : génération de la réponse avec le prompt système complet
+  6. Logs : utilise l'intention métier déjà extraite à l'étape 3
+  7. Mémoire : masquage des données sensibles avant stockage, détection d'un
      nouveau menu proposé dans la réponse
 """
 import streamlit as st
 from retrieval import MoteurRecherche
 from llm import appeler_llm
-from memoire import etat_initial, reformuler_avec_historique, extraire_slots, ajouter_echange
+from memoire import etat_initial, reformuler_avec_historique, mettre_a_jour_slots_depuis_entites, ajouter_echange
 from salutations import reponse_fixe_si_politesse
-from logs import detecter_intention_metier, enregistrer_echange
+from logs import enregistrer_echange
 
 st.set_page_config(page_title="Assistant orientation ParcourSup Guinée", page_icon="🎓")
 st.title("🎓 Assistant orientation — ParcourSup Guinée")
@@ -57,11 +63,14 @@ if message:
                 # 2. Mémoire : reformulation + résolution de menu
                 question_traitee = reformuler_avec_historique(message, etat)
 
-                # 3. Extraction des slots structurés (mise à jour en continu)
-                extraire_slots(question_traitee, etat)
-
-                # 4. Retrieval (route fait/liste/hors-sujet)
+                # 3. Retrieval (route fait/liste/hors-sujet/clarification) --
+                # extrait aussi les entités (ville, profil, moyenne, projet,
+                # intention métier) en un seul appel, réutilisées ci-dessous
                 resultat_recherche = moteur.rechercher(question_traitee)
+
+                # 4. Mémoire : mise à jour des slots, sans appel API
+                # supplémentaire (utilise les entités déjà extraites à l'étape 3)
+                mettre_a_jour_slots_depuis_entites(etat, resultat_recherche["entites"])
 
                 # 5. Génération -- court-circuits sans appel LLM de génération
                 if resultat_recherche["intention"] == "hors_sujet":
@@ -86,17 +95,16 @@ if message:
                 with st.expander("Sources utilisées (debug)"):
                     st.json(resultat_recherche)
 
-            # Observabilité : intention métier + log, sans jamais influencer
-            # la recherche ou la génération (déjà décidées ci-dessus)
-            intention_metier = detecter_intention_metier(message)
+            # 6. Logs : intention métier déjà extraite à l'étape 3, pas de
+            # nouvel appel API dédié
             enregistrer_echange(
                 question=message,
                 reponse=reponse,
                 intention_technique=resultat_recherche["intention"],
-                intention_metier=intention_metier,
+                intention_metier=resultat_recherche["entites"]["intention_metier"],
                 nb_resultats=len(resultat_recherche["resultats"]),
                 ville=etat["slots"].get("ville"),
             )
 
-            # 6. Mise à jour mémoire (masquage sensible inclus)
+            # 7. Mise à jour mémoire (masquage sensible inclus)
             ajouter_echange(etat, message, reponse)

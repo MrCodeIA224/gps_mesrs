@@ -1,5 +1,6 @@
 .env
 data/chroma_db/
+data/logs_conversations.jsonl
 __pycache__/
 *.pyc
 mon_env_mistral/

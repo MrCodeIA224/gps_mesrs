@@ -65,8 +65,14 @@ Réponds uniquement avec la question, sans commentaire."""
 
 
 def extraire_slots(question: str, etat: dict) -> None:
-    """Met à jour les slots structurés si la question en révèle de nouveaux
-    (ville, profil du bac, projet professionnel...). Modifie etat en place."""
+    """[CONSERVÉE POUR RÉFÉRENCE / COMPATIBILITÉ -- plus appelée par app.py]
+
+    Faisait un appel LLM dédié pour extraire ville/profil_bac/moyenne_bac/
+    projet_professionnel. Redondant avec l'extraction déjà faite par
+    classifier_intention() dans retrieval.py -- consolidé en un seul appel
+    pour réduire le nombre de requêtes API par question (voir
+    mettre_a_jour_slots_depuis_entites, qui fait la même mise à jour SANS
+    appel API, à partir du résultat déjà obtenu)."""
     prompt = f"""Analyse ce message d'étudiant et extrais, si présentes, les informations
 suivantes. Réponds UNIQUEMENT en JSON, sans commentaire ni balise de code.
 
@@ -89,6 +95,20 @@ Ne mets une valeur que si elle est explicitement mentionnée dans le message."""
                 etat["slots"][cle] = valeur
     except Exception:
         pass  # extraction best-effort : en cas d'échec, on ne bloque pas la conversation
+
+
+def mettre_a_jour_slots_depuis_entites(etat: dict, entites: dict) -> None:
+    """Met à jour les slots structurés SANS appel API, à partir des
+    entités déjà extraites par MoteurRecherche.rechercher() (champ
+    "entites" de son résultat) -- remplace extraire_slots(), qui faisait
+    un appel LLM redondant avec celui déjà fait pour la classification
+    fait/liste. Même logique de fusion : on ne met à jour un slot que si
+    une nouvelle valeur est trouvée, pour ne jamais effacer une info
+    connue d'un échange précédent."""
+    for cle in SLOTS_CONNUS:
+        valeur = entites.get(cle)
+        if valeur is not None:
+            etat["slots"][cle] = valeur
 
 
 def detecter_menu_propose(reponse_assistant: str) -> list | None:

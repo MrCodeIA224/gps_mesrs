@@ -23,7 +23,7 @@ import numpy as np
 from rank_bm25 import BM25Okapi
 from sentence_transformers import SentenceTransformer, CrossEncoder
 from llm import appeler_llm_brut
-from utils_texte import normaliser
+from utils_texte import normaliser, extraire_json_de_texte
 from pretraitement import construire_vocabulaire_domaine, normaliser_et_corriger, code_profil_bac
 
 CHROMA_PATH = "../data/chroma_db"
@@ -119,7 +119,7 @@ Réponds UNIQUEMENT par OUI ou NON, rien d'autre."""
         if self._est_hors_sujet(question):
             return {"intention": "hors_sujet", "ville": None, "ies": None,
                      "mot_cle_programme": None, "profil_bac": None, "moyenne_bac": None,
-                     "profil_bac_code": None, "intention_metier": "autre"}
+                     "profil_bac_code": None, "projet_professionnel": None, "intention_metier": "autre"}
 
         prompt = f"""Analyse cette question d'étudiant et réponds UNIQUEMENT en JSON,
 sans commentaire ni balise de code.
@@ -153,21 +153,21 @@ Détermine :
 - "mot_cle_programme": mot-clé de domaine d'étude mentionné (ex: "droit"), ou null
 - "profil_bac": profil du bac mentionné en toutes lettres (ex: "sciences mathématiques"), ou null
 - "moyenne_bac": moyenne au bac mentionnée par l'étudiant (nombre), ou null
+- "projet_professionnel": métier ou domaine professionnel visé si mentionné (ex: "devenir médecin"), ou null
 - "intention_metier": classe la question dans UNE de ces catégories (à usage
   statistique uniquement, n'influence pas la recherche) : "recherche_programme",
   "recherche_universite", "paiement", "inscription", "resultat", "bourse",
   "reorientation", "probleme_technique", "recuperation_compte", "procedure", "autre"
 
-Exemple : {{"intention": "liste", "ville": "Kankan", "ies": null, "mot_cle_programme": null, "profil_bac": null, "moyenne_bac": null, "intention_metier": "recherche_programme"}}"""
+Exemple : {{"intention": "liste", "ville": "Kankan", "ies": null, "mot_cle_programme": null, "profil_bac": null, "moyenne_bac": null, "projet_professionnel": null, "intention_metier": "recherche_programme"}}"""
 
         try:
-            reponse = appeler_llm_brut(prompt).strip().strip("`")
-            reponse = reponse.replace("json\n", "").strip()
-            resultat = json.loads(reponse)
+            reponse_brute = appeler_llm_brut(prompt)
+            resultat = extraire_json_de_texte(reponse_brute)
         except Exception:
             return {"intention": "fait", "ville": None, "ies": None,
                      "mot_cle_programme": None, "profil_bac": None, "moyenne_bac": None,
-                     "intention_metier": "autre"}
+                     "projet_professionnel": None, "intention_metier": "autre"}
 
         # Conversion du profil en toutes lettres vers le code réel stocké
         # dans les métadonnées (ex: "sciences mathématiques" -> "SM")
@@ -293,16 +293,35 @@ Exemple : {{"intention": "liste", "ville": "Kankan", "ies": null, "mot_cle_progr
     # Point d'entrée unique : route vers le bon chemin
     # ------------------------------------------------------------------
     def rechercher(self, question: str) -> dict:
-        """Retourne {"intention": "fait"|"liste"|"hors_sujet"|"clarification", "resultats": [...]}."""
-        # Normalisation/correction AVANT toute classification (abréviations,
-        # fautes de frappe sur le vocabulaire du domaine) -- protège aussi
-        # bien le classifieur d'intention que la recherche hybride en aval.
-        question_normalisee = normaliser_et_corriger(question, self.vocabulaire_domaine)
+        """Retourne {"intention", "resultats", "note", "entites"}.
 
+        "entites" contient les informations déjà extraites par le
+        classifieur (ville, profil_bac, moyenne_bac, projet_professionnel,
+        intention_metier) -- exposées ici pour que l'appelant (app.py)
+        puisse alimenter la mémoire structurée ET les logs à partir de ce
+        SEUL appel, au lieu de refaire 2 appels séparés à Mistral pour
+        extraire des informations déjà obtenues ici (consolidation faite
+        pour réduire le nombre d'allers-retours par question, passant de
+        6-7 à 4-5 appels)."""
+        question_normalisee = normaliser_et_corriger(question, self.vocabulaire_domaine)
         intention = self.classifier_intention(question_normalisee)
 
+        def _resultat(intention_type: str, resultats: list, note: str | None = None) -> dict:
+            return {
+                "intention": intention_type,
+                "resultats": resultats,
+                "note": note,
+                "entites": {
+                    "ville": intention.get("ville"),
+                    "profil_bac": intention.get("profil_bac"),
+                    "moyenne_bac": intention.get("moyenne_bac"),
+                    "projet_professionnel": intention.get("projet_professionnel"),
+                    "intention_metier": intention.get("intention_metier", "autre"),
+                },
+            }
+
         if intention.get("intention") == "hors_sujet":
-            return {"intention": "hors_sujet", "resultats": [], "note": None}
+            return _resultat("hors_sujet", [])
 
         if intention.get("intention") == "liste":
             filtres = {
@@ -319,7 +338,7 @@ Exemple : {{"intention": "liste", "ville": "Kankan", "ies": null, "mot_cle_progr
             # disponibles ?") -- on demande une précision plutôt que de
             # renvoyer une liste arbitraire et inutilisable.
             if nb_filtres_actifs == 0:
-                return {"intention": "clarification", "resultats": [], "note": None}
+                return _resultat("clarification", [])
 
             moyenne_bac = filtres.pop("moyenne_bac")
 
@@ -330,10 +349,10 @@ Exemple : {{"intention": "liste", "ville": "Kankan", "ies": null, "mot_cle_progr
             if not candidats_domaine:
                 # Rien ne correspond même sans filtre numérique -> vraie
                 # absence d'information (mauvais domaine, catégorie inexistante)
-                return {"intention": "liste", "resultats": [], "note": None}
+                return _resultat("liste", [])
 
             if moyenne_bac is None:
-                return {"intention": "liste", "resultats": candidats_domaine, "note": None}
+                return _resultat("liste", candidats_domaine)
 
             # Étape 2 : appliquer le filtre numérique sur ce sous-ensemble
             candidats_avec_moyenne = self.recherche_liste(**filtres, moyenne_bac=moyenne_bac)
@@ -350,9 +369,9 @@ Exemple : {{"intention": "liste", "ville": "Kankan", "ies": null, "mot_cle_progr
                         f"catégorie n'accepte une moyenne de {moyenne_bac}/20 -- indique-le "
                         f"clairement à l'étudiant en t'appuyant sur les seuils réels ci-dessous, "
                         f"ne dis pas que l'information est indisponible.")
-                return {"intention": "liste", "resultats": candidats_domaine, "note": note}
+                return _resultat("liste", candidats_domaine, note)
 
-            return {"intention": "liste", "resultats": candidats_avec_moyenne, "note": None}
+            return _resultat("liste", candidats_avec_moyenne)
 
         resultats = self.recherche_fait(question_normalisee)
-        return {"intention": "fait", "resultats": resultats, "note": None}
+        return _resultat("fait", resultats)

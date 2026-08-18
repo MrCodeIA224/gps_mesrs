@@ -1,5 +1,18 @@
+"""
+LLM — Appel à l'API Mistral, avec le prompt système complet fourni par
+l'étudiant (32 sections originales + 2 sections ajoutées en cours de
+conception : section 33 anti-sources-en-clair, section 34 raisonnement
+numérique).
 
+Migration Groq -> Mistral : quota Groq (100 000 tokens/jour sur le modèle
+70B) épuisé à plusieurs reprises en test. Le palier gratuit Mistral est
+nettement plus généreux (500 000 tokens/minute, ~1 milliard tokens/mois,
+confirmé sur la documentation officielle) -- largement suffisant pour ne
+plus avoir besoin de séparer les appels entre 2 modèles différents comme
+c'était nécessaire avec Groq.
+"""
 import os
+import re
 import time
 from dotenv import load_dotenv
 from mistralai.client import Mistral
@@ -123,7 +136,7 @@ Les numéros des centres d'appel doivent être récupérés UNIQUEMENT depuis le
 
 RÈGLE ABSOLUE, SANS AUCUNE EXCEPTION : si un numéro de téléphone n'apparaît PAS littéralement, chiffre pour chiffre, dans le contexte documentaire fourni pour cette question, tu NE DOIS JAMAIS écrire un numéro de téléphone dans ta réponse — même un numéro qui te semble plausible ou dans le bon format. Dans ce cas, dis explicitement : « Je vous invite à me préciser votre ville pour que je puisse vous donner le numéro exact » ou « Cette information ne figure pas dans les données dont je dispose pour votre ville, contactez le centre d'appel via la plateforme officielle. »
 
-Exemple de ce qu'il NE FAUT PAS faire : inventer « 628 28 28 28 » comme numéro de Conakry parce que le format semble correct — un numéro inventé, même plausible, reste une hallucination interdite par la règle 26.
+Exemple de ce qu'il NE FAUT PAS faire : inventer un numéro qui suit le bon format guinéen (par exemple une suite de chiffres avec des répétitions qui semble plausible) parce qu'il "a l'air correct" — un numéro inventé, même parfaitement formaté, reste une hallucination interdite par la règle 26.
 
 Si la ville du bachelier est connue ET que le contexte fourni contient réellement les numéros de cette ville, fournis-les directement. Si elle n'est pas connue, demande : « Dans quelle ville ou préfecture êtes-vous ? » Si aucun centre correspondant n'est trouvé dans le contexte fourni, signale-le clairement plutôt que d'inventer.
 
@@ -233,6 +246,8 @@ Pour une erreur concernant nom, prénom, date de naissance, sexe, filiation, éc
 
 N'invente jamais : une université, un programme, un débouché, une condition d'admission, un numéro de téléphone, une adresse, un montant, une date, une procédure, un résultat, ou une information personnelle concernant un utilisateur. Si l'information n'est pas disponible, dis-le clairement. « Je ne dispose pas de cette information » est préférable à une réponse inventée.
 
+PRINCIPE DE VÉRIFICATION GÉNÉRALE (couvre tout cas non explicitement listé ailleurs dans ce prompt) : avant d'écrire un fait précis (un chiffre, un nom propre, une date, une règle, une étape de procédure), demande-toi silencieusement : « Est-ce que je peux montrer la phrase EXACTE du contexte fourni qui dit ça ? ». Si tu ne peux pas pointer une phrase précise du contexte pour justifier ce fait, ne l'écris pas -- reformule sans ce détail, ou dis que l'information n'est pas disponible. Ce principe s'applique même quand le fait te semble évident, cohérent avec le reste, ou utile pour être complet : une information non vérifiable dans le contexte actuel ne doit jamais apparaître dans ta réponse, peu importe à quel point elle semble plausible.
+
 ======================================================================
 27. DISTINCTION ENTRE INFORMATION ET CONSEIL
 ======================================================================
@@ -308,7 +323,17 @@ Exemple de ce qu'il NE FAUT PAS faire :
 « Vous pourriez tenter un concours dans une école privée d'architecture » (école inventée, non documentée)
 
 Exemple correct :
-« Je ne trouve pas, dans les informations disponibles, un programme alternatif précis correspondant à votre moyenne dans ce domaine. Je vous invite à consulter la liste complète des programmes sur la plateforme, filtrée par votre profil et votre moyenne. »"""
+« Je ne trouve pas, dans les informations disponibles, un programme alternatif précis correspondant à votre moyenne dans ce domaine. Je vous invite à consulter la liste complète des programmes sur la plateforme, filtrée par votre profil et votre moyenne. »
+
+======================================================================
+37. NE JAMAIS AJOUTER UNE ÉTAPE OU UNE INFORMATION NON DEMANDÉE ET NON PRÉSENTE DANS LE CONTEXTE
+======================================================================
+
+Réponds STRICTEMENT à la question posée, avec les informations du contexte fourni pour CETTE question précise. N'ajoute JAMAIS une étape "logique suivante" ou une information complémentaire (montant, procédure, délai...) simplement parce qu'elle te semble liée au sujet -- même si elle est vraie ailleurs dans le système, si elle n'apparaît pas dans le contexte fourni pour cette question précise, tu ne dois pas l'écrire.
+
+Exemple de ce qu'il NE FAUT PAS faire : à une question sur la création de compte (dont le contexte ne mentionne aucun montant), ajouter de toi-même une phrase comme « Après la création du compte, le paiement des frais coûte un certain montant » -- inventer ou rappeler un montant, une procédure ou une étape qui n'est pas dans le contexte de CETTE question précise est une hallucination, même quand elle part d'une bonne intention d'être complet, et même si ce montant est correct pour une AUTRE procédure du système (ne mélange jamais les montants ou règles de deux procédures différentes, même toutes deux réelles).
+
+Si tu penses qu'une information complémentaire serait utile mais qu'elle n'est pas dans le contexte fourni, tu peux à la rigueur suggérer à l'étudiant de poser une question de suivi précise (« N'hésitez pas à me demander le montant des frais si vous en avez besoin »), mais SANS jamais fournir toi-même ce chiffre s'il n'est pas dans le contexte actuel."""
 
 
 MAX_ELEMENTS_LISTE = 40  # au-delà, le contexte devient trop volumineux pour
@@ -354,6 +379,55 @@ def construire_contexte(resultats: list) -> str:
                      f"Si pertinent, suggère à l'étudiant de préciser sa recherche -- ville, "
                      f"université ou domaine d'études -- pour affiner les résultats.)")
     return contexte
+
+
+def _extraire_montants_et_numeros(texte: str) -> list:
+    """Extrait les montants en GNF et les numéros de téléphone (format
+    guinéen, groupes de chiffres séparés par espaces/points) présents dans
+    un texte, pour vérification ultérieure contre le contexte fourni."""
+    montants = re.findall(r"\b\d[\d\s]{2,10}\s*GNF\b", texte)
+    numeros = re.findall(r"\b\d{2,3}(?:[ .]\d{2,3}){2,3}\b", texte)
+    # Ne garder que les séquences de 8 à 10 chiffres au total (longueur
+    # plausible d'un numéro de téléphone guinéen) -- élimine les faux
+    # positifs comme "2024" (année) ou un PV du bac au format différent.
+    numeros = [n for n in numeros if 8 <= len(re.sub(r"\D", "", n)) <= 10]
+    return montants + numeros
+
+
+def _valeur_presente_dans_contexte(valeur: str, contexte: str) -> bool:
+    """Vérifie si un montant/numéro apparaît bien comme un NOMBRE ENTIER
+    ISOLÉ dans le contexte -- pas comme une simple sous-chaîne d'une
+    concaténation globale de tous les chiffres du texte.
+
+    Bug réel corrigé : la concaténation globale créait de faux positifs
+    par juxtaposition accidentelle. Exemple concret rencontré en test :
+    le contexte "[Information 1] ... fixés à 50 000 GNF" concatène en
+    "1" + "50000" = "150000", validant à tort un montant halluciné de
+    "150 000 GNF" comme "présent", uniquement à cause de l'étiquette
+    technique interne "Information 1" collée juste avant le vrai montant."""
+    chiffres_valeur = re.sub(r"\D", "", valeur)
+    if not chiffres_valeur:
+        return True  # rien à vérifier
+    # Extrait chaque nombre du contexte comme une UNITÉ séparée (une suite
+    # de chiffres, éventuellement avec des espaces internes comme "50 000"),
+    # plutôt que de tout concaténer en un seul bloc.
+    nombres_contexte = re.findall(r"\d[\d\s]*\d|\d", contexte)
+    nombres_normalises = {re.sub(r"\s", "", n) for n in nombres_contexte}
+    return chiffres_valeur in nombres_normalises
+
+
+def verifier_chiffres_non_verifies(reponse: str, contexte: str) -> list:
+    """Filet de sécurité indépendant du prompt : relit la réponse générée
+    et signale tout montant ou numéro de téléphone qui n'apparaît PAS
+    littéralement dans le contexte documentaire fourni pour cette question
+    -- ces deux catégories sont les seules qu'on peut vérifier de façon
+    fiable par comparaison de chiffres (contrairement à un fait en texte
+    libre, difficile à vérifier automatiquement). Ne corrige pas la
+    réponse elle-même (risque de complexité et de nouvelles erreurs), mais
+    permet de logger/signaler les cas suspects pour suivi."""
+    valeurs = _extraire_montants_et_numeros(reponse)
+    suspects = [v for v in valeurs if not _valeur_presente_dans_contexte(v, contexte)]
+    return suspects
 
 
 def appeler_llm(question: str, resultats: list | None, slots: dict | None = None,
@@ -405,7 +479,39 @@ def appeler_llm(question: str, resultats: list | None, slots: dict | None = None
             messages.append({"role": "assistant", "content": echange["reponse"]})
     messages.append({"role": "user", "content": prompt_utilisateur})
 
-    return _generer_avec_relance(messages=messages, temperature=temperature, max_tokens=800)
+    try:
+        reponse = _generer_avec_relance(messages=messages, temperature=temperature, max_tokens=800)
+    except SDKError:
+        # Toutes les tentatives de relance ont échoué (~50 secondes
+        # d'attente au total) -- on affiche un message clair à l'étudiant
+        # plutôt que de laisser l'exception remonter et faire planter toute
+        # l'application Streamlit (bug réel observé : une erreur 429
+        # persistante crashait complètement l'app au lieu d'un message).
+        return ("Le service est temporairement surchargé ou indisponible. "
+                "Merci de réessayer dans quelques instants. Si le problème persiste, "
+                "vous pouvez contacter le centre d'appel de votre ville.")
+
+    # Filet de sécurité indépendant du prompt : vérifie après coup si des
+    # montants/numéros de téléphone dans la réponse générée apparaissent
+    # bien dans le contexte fourni -- ne corrige pas automatiquement (trop
+    # risqué), mais logge un avertissement clair en console pour un suivi
+    # manuel. Cas réel ayant motivé cet ajout : un montant de 150 000 GNF
+    # (inscription) confondu avec celui de l'orientation (50 000 GNF),
+    # absent du contexte de la question posée.
+    suspects = verifier_chiffres_non_verifies(reponse, contexte)
+    if suspects:
+        print(f"[ALERTE ANTI-HALLUCINATION] Valeur(s) non vérifiée(s) dans le contexte : "
+              f"{suspects} -- question : {question!r}")
+        # Signal visible directement dans le chat, en plus du log console --
+        # plus fiable qu'un print (dont l'affichage dans le terminal peut
+        # varier selon l'environnement), et surtout directement utile à
+        # l'étudiant, pas seulement à des fins de débogage.
+        valeurs_texte = ", ".join(suspects)
+        reponse += (f"\n\n⚠️ *Attention : cette réponse mentionne ({valeurs_texte}) qui n'a pas "
+                    f"pu être confirmé dans la documentation pour cette question précise. "
+                    f"Vérifiez ce point auprès du centre d'appel avant de vous y fier.*")
+
+    return reponse
 
 
 def appeler_llm_brut(prompt: str) -> str:
@@ -420,11 +526,14 @@ def appeler_llm_brut(prompt: str) -> str:
 
 
 def _generer_avec_relance(messages: list, temperature: float, max_tokens: int,
-                            nb_tentatives: int = 3, delai_secondes: float = 2.0) -> str:
+                            nb_tentatives: int = 5, delai_secondes: float = 5.0) -> str:
     """Appelle l'API Mistral avec relance automatique en cas d'erreur
-    serveur/quota temporaire -- même principe que pour Gemini/Groq, les
-    paliers gratuits de tous les fournisseurs peuvent avoir des pics de
-    charge ou des limites momentanées."""
+    serveur/quota temporaire. Paramètres augmentés (3->5 tentatives, 2s->5s
+    de délai de base) après un cas réel où 3 tentatives rapprochées (~6s au
+    total) n'ont pas suffi à absorber une limite de débit (429) -- le délai
+    augmente linéairement (5s, 10s, 15s, 20s), pour une attente totale
+    d'environ 50 secondes avant abandon, suffisant pour la plupart des
+    limites par minute."""
     derniere_erreur = None
     for tentative in range(nb_tentatives):
         try:

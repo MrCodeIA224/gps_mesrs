@@ -46,8 +46,20 @@ DICTIONNAIRE_ABREVIATIONS = {
     "info": "informatique",
     "eco": "économie",
     "gestion": "sciences de gestion",
-    "droit": "sciences juridiques",
-    "fac de droit": "sciences juridiques",
+    # Décalages singulier/pluriel ou forme du mot, trouvés en test
+    # systématique sur une large liste de domaines (contrairement à "droit",
+    # ici le mot existe bien dans le corpus mais sous une forme légèrement
+    # différente que la recherche par sous-chaîne ne capte pas) :
+    "tourisme": "touristique",
+    "agriculture": "agricole",
+    "langues": "langue",
+    # "droit" -> retiré volontairement (contrairement aux autres entrées de
+    # ce dictionnaire) : les vrais programmes du corpus s'appellent "Licence
+    # En Droit", jamais "Sciences Juridiques". Cette transformation
+    # remplaçait à tort "droit" par un terme absent du corpus, empêchant
+    # TOUTE question sur le droit de trouver un résultat -- bug réel
+    # confirmé en test (seul "droit" échouait systématiquement, tous les
+    # autres domaines fonctionnaient normalement).
     "medecine": "médecine",
     "archi": "architecture",
     "univ": "université",
@@ -102,6 +114,12 @@ SEUIL_SIMILARITE_FLOU = 0.85
 # d'origine qui a motivé la création de cette couche de correction.
 CONFUSIONS_CONNUES = {
     "bas": "bac",
+    # "Konakry" (avec K) est une variante d'orthographe courante de
+    # "Conakry" -- trop différente de la forme officielle pour être
+    # rattrapée par la seule correction floue (similarité 0.71, sous le
+    # seuil de 0.85), alors que c'est la ville la plus demandée du corpus.
+    "konakry": "conakry",
+    "konakri": "conakry",
 }
 
 # Filet de sécurité supplémentaire, en plus du dictionnaire français --
