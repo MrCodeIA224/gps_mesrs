@@ -31,4 +31,8 @@ pip-delete-this-directory.txt
 # OS files
 .DS_Store
 
-mistral_project_final/
+
+
+
+# Local project directory (ignored only if not already tracked)
+/mistral_project_final/
