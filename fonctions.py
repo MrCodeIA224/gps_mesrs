@@ -61,12 +61,17 @@ def repondre(question: str) -> tuple[str, list[dict]]:
         "[Réponse de test] Une fois le retrieval prêt, cette réponse viendra des guides officiels du MESRS.",
     ]
 
+    sources_bouchon = [
+        {"titre": "Exemple de programme — Économie", "source": "matrice_programmes"},
+        {"titre": "Critères d'orientation — Bac SE", "source": "guide_orientation"},
+    ]
+
     # sources_bouchon = [
     #     {"titre": "Exemple de programme — Économie", "source": "matrice_programmes"},
     #     {"titre": "Critères d'orientation — Bac SE", "source": "guide_orientation"},
     # ]
 
-    return random.choice(reponses_bouchon)
+    return random.choice(reponses_bouchon), sources_bouchon
 
 
 # ---------------------------------------------------------------------------
@@ -97,18 +102,28 @@ def generer_pdf_conversation(historique: list[dict]) -> bytes:
     """
     from fpdf import FPDF
 
+    SUBSTITUTIONS = {
+        "—": "-", "–": "-", "’": "'", "‘": "'",
+        "“": '"', "”": '"', "…": "...", "•": "-",
+    }
+
+    def nettoyer(texte: str) -> str:
+        for original, remplacement in SUBSTITUTIONS.items():
+            texte = texte.replace(original, remplacement)
+        return texte.encode("latin-1", "replace").decode("latin-1")
+
     pdf = FPDF()
     pdf.add_page()
     largeur = pdf.epw  # largeur utile de la page (hors marges)
 
     pdf.set_font("Helvetica", "B", 16)
     pdf.set_x(pdf.l_margin)
-    pdf.cell(largeur, 10, "GPS-MESRS — Récapitulatif de conversation", new_x="LMARGIN", new_y="NEXT")
+    pdf.cell(largeur, 10, nettoyer("GPS-MESRS — Récapitulatif de conversation"), new_x="LMARGIN", new_y="NEXT")
 
     pdf.set_font("Helvetica", "", 9)
     pdf.set_text_color(120, 120, 120)
     pdf.set_x(pdf.l_margin)
-    pdf.cell(largeur, 8, "Projet académique — Master 1 IA, DIT", new_x="LMARGIN", new_y="NEXT")
+    pdf.cell(largeur, 8, nettoyer("Projet académique — Master 1 IA, DIT"), new_x="LMARGIN", new_y="NEXT")
     pdf.ln(6)
     pdf.set_text_color(0, 0, 0)
 
@@ -116,10 +131,10 @@ def generer_pdf_conversation(historique: list[dict]) -> bytes:
         auteur = "Vous" if message["role"] == "user" else "GPS-MESRS"
         pdf.set_font("Helvetica", "B", 11)
         pdf.set_x(pdf.l_margin)
-        pdf.multi_cell(largeur, 7, f"{auteur} :")
+        pdf.multi_cell(largeur, 7, nettoyer(f"{auteur} :"))
         pdf.set_font("Helvetica", "", 10)
         pdf.set_x(pdf.l_margin)
-        pdf.multi_cell(largeur, 6, message["contenu"])
+        pdf.multi_cell(largeur, 6, nettoyer(message["contenu"]))
         pdf.ln(3)
 
     return bytes(pdf.output())
