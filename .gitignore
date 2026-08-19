@@ -34,5 +34,5 @@ pip-delete-this-directory.txt
 
 
 
-# Local project directory (ignored only if not already tracked)
-./mistral_project_final/
+# Local project directory
+/mistral_project_final/
