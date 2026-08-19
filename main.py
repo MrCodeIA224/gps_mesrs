@@ -87,7 +87,7 @@ st.html(
        --------------------------------------------------------------- */
     div[data-testid="stDialog"] {
         justify-content: flex-end !important;
-        padding-right: 40px;
+        padding-right: 50px;
     }
     div[data-testid="stDialog"] > div {
         max-height: 85vh;
@@ -111,11 +111,7 @@ def ouvrir_chat() -> None:
     with zone_messages:
         for message in st.session_state.historique:
             with st.chat_message(message["role"]):
-                st.markdown(message["contenu"])
-                if message["role"] == "assistant" and message.get("sources"):
-                    with st.expander("📚 Sources utilisées"):
-                        for source in message["sources"]:
-                            st.markdown(f"- **{source['titre']}** _(source : {source['source']})_")
+                st.markdown(message["contenu"])                
 
     # -----------------------------------------------------------------
     # Saisie utilisateur
@@ -135,15 +131,11 @@ def ouvrir_chat() -> None:
                 st.markdown(question_saisie)
             with st.chat_message("assistant"):
                 with st.spinner("Recherche dans les guides officiels..."):
-                    reponse, sources = repondre(question_saisie)
-                st.markdown(reponse)
-                if sources:
-                    with st.expander("📚 Sources utilisées"):
-                        for source in sources:
-                            st.markdown(f"- **{source['titre']}** _(source : {source['source']})_")
+                    reponse = repondre(question_saisie)
+                st.markdown(reponse)                
 
         st.session_state.historique.append(
-            {"role": "assistant", "contenu": reponse, "sources": sources}
+            {"role": "assistant", "contenu": reponse}
         )
         # Pas de st.rerun() ici : à l'intérieur d'un st.dialog, Streamlit ne
         # doit re-exécuter QUE le dialogue lui-même, pas toute l'appli — un
