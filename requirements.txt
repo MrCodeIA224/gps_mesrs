@@ -39,3 +39,17 @@ urllib3==2.7.0
 uvicorn==0.52.3
 watchdog==6.0.0
 websockets==16.1.1
+
+chromadb>=0.5
+sentence-transformers>=3.0
+rank_bm25>=0.2.2
+mistralai>=1.0
+python-dotenv>=1.0
+streamlit>=1.38
+ragas==0.3.9
+datasets>=2.20
+langchain-mistralai>=0.2
+langchain-huggingface>=0.1
+pyspellchecker>=0.8
+numpy
+pandas>=2.0
