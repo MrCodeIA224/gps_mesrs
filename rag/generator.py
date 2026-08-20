@@ -97,9 +97,8 @@ def generate_answer(prompt, model, tokenizer):
     messages = [
         {
             "role": "system",
-            "content": SYSTEM_PROMPT:
-        - N'ajoute pas de recommandation, de conseil, de lien ou de source
-  qui ne figure pas explicitement dans le contexte fourni.},
+            "content": "SYSTEM_PROMPT"     
+        },
         {
             "role": "user",
             "content": prompt
