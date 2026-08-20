@@ -32,7 +32,3 @@ pip-delete-this-directory.txt
 .DS_Store
 
 chroma_db/
-
-
-# Local project directory (ignored only if not already tracked)
-mistral_project_final/
