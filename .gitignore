@@ -31,3 +31,5 @@ pip-delete-this-directory.txt
 
 # OS files
 .DS_Store
+
+chroma_db/
