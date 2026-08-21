@@ -16,7 +16,7 @@ manuelle guidée par le champ "notes" de chaque cas.
 import json
 from retrieval import MoteurRecherche
 from llm import appeler_llm
-from memoire import etat_initial, reformuler_avec_historique, extraire_slots, ajouter_echange
+from memoire import etat_initial, reformuler_avec_historique, ajouter_echange
 from salutations import reponse_fixe_si_politesse
 from securite import masquer_donnees_sensibles
 
@@ -73,7 +73,7 @@ def executer_cas_special(moteur: MoteurRecherche, cas: dict, etat_menu: dict) ->
         print(f"Intention détectée : {resultat['intention']} (court-circuit, pas d'appel LLM)")
         return
 
-    reponse = appeler_llm(question_traitee, resultat["resultats"])
+    reponse = appeler_llm(question_traitee, resultat["resultats"], note=resultat.get("note"))
     print("Intention détectée :", resultat["intention"])
     print("Nombre de résultats :", len(resultat["resultats"]))
     print("Réponse :", reponse[:300], "...")

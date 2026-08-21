@@ -18,7 +18,7 @@ MEMOIRE — Deux mécanismes distincts, comme exigé par le prompt système :
 from llm import appeler_llm_brut
 from securite import masquer_donnees_sensibles
 
-TAILLE_FENETRE = 3
+TAILLE_FENETRE = 5
 SLOTS_CONNUS = ["ville", "profil_bac", "moyenne_bac", "projet_professionnel"]
 
 
@@ -47,9 +47,24 @@ def reformuler_avec_historique(question: str, etat: dict) -> str:
 
 Nouvelle question : "{question}"
 
-Si cette question fait référence à quelque chose mentionné dans l'historique,
-reformule-la pour qu'elle soit compréhensible seule. Sinon renvoie-la telle quelle.
-Réponds uniquement avec la question, sans commentaire."""
+Si cette nouvelle question fait référence à quelque chose mentionné dans
+l'historique (un programme, un lieu, "il", "ça", "ce programme"...),
+reformule-la pour qu'elle soit compréhensible seule.
+
+CAS PARTICULIER IMPORTANT : si le dernier message de l'assistant posait
+une question de clarification (ex: "précisez votre ville", "quel est
+votre profil ?"), et que la nouvelle question est une réponse courte à
+CETTE clarification (ex: juste un nom de ville, un chiffre, un mot),
+reformule-la en une question complète qui combine la clarification donnée
+avec la VRAIE demande initiale de l'étudiant (celle qui a déclenché la
+question de clarification). Exemple concret : si l'assistant a demandé
+"quelle est votre ville ?" après avoir été interrogé sur un numéro de
+centre d'appel, et que l'étudiant répond juste "je suis à Conakry",
+reformule en "quel est le numéro du centre d'appel de Conakry ?" -- pas
+juste "je suis à Conakry" tel quel, qui ne serait pas exploitable seul.
+
+Sinon, renvoie la question telle quelle.
+Réponds uniquement avec la question reformulée, sans commentaire."""
         question_a_traiter = appeler_llm_brut(prompt).strip()
 
     # Résolution d'une réponse courte à un menu proposé juste avant
