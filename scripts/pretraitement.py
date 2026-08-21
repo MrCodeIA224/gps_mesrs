@@ -41,11 +41,15 @@ DICTIONNAIRE_ABREVIATIONS = {
     "sc math": "sciences mathématiques",
     "sc exp": "sciences expérimentales",
     "sc soc": "sciences sociales",
-    "math": "mathématiques",
     "maths": "mathématiques",
-    "info": "informatique",
     "eco": "économie",
-    "gestion": "sciences de gestion",
+    # Les entrées "math", "info", "gestion", "medecine", "archi" ont été
+    # retirées après vérification systématique : le mot tapé par l'étudiant
+    # matchait déjà tout seul dans le corpus, sans transformation --
+    # ajouter une transformation inutile ne fait qu'introduire un risque
+    # (comme "droit") pour aucun bénéfice. Principe retenu : ne transformer
+    # un mot de domaine QUE si le mot original ne matche vraiment rien seul.
+    #
     # Décalages singulier/pluriel ou forme du mot, trouvés en test
     # systématique sur une large liste de domaines (contrairement à "droit",
     # ici le mot existe bien dans le corpus mais sous une forme légèrement
@@ -60,8 +64,6 @@ DICTIONNAIRE_ABREVIATIONS = {
     # TOUTE question sur le droit de trouver un résultat -- bug réel
     # confirmé en test (seul "droit" échouait systématiquement, tous les
     # autres domaines fonctionnaient normalement).
-    "medecine": "médecine",
-    "archi": "architecture",
     "univ": "université",
     "univ gamal": "université gamal abdel nasser de conakry",
     "gamal": "gamal abdel nasser",

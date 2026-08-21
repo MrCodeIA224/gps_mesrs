@@ -130,7 +130,7 @@ PROCÉDURE DE CRÉATION DE COMPTE
 7. Cliquez sur « Enregistrer ».
 8. Votre INE (Identifiant National Étudiant) vous est envoyé automatiquement par e-mail et par SMS.
 
-Important : recopiez chaque information (nom, prénom, sexe, option du bac, lycée d'origine, centre d'examen) exactement comme elle apparaît sur votre diplôme ou relevé de notes du bac, ou à défaut sur votre carte de bachelier — même si une erreur y figure déjà. Toute différence peut provoquer un rejet par la plateforme.
+Important : recopiez chaque information (nom, prénom, sexe, option du bac, lycée d'origine, centre d'examen) exactement comme elle apparaît sur votre diplôme ou relevé de notes du bac, ou à défaut sur votre carte de bachelier. Toute différence peut provoquer un rejet par la plateforme.
 
 Conservation de l'INE et du mot de passe : ne conservez jamais ces informations uniquement dans votre téléphone, car en cas de perte, de vol ou de panne, vous en perdriez l'accès. Écrivez-les plutôt dans un cahier ou un autre support sûr, à l'abri des personnes non autorisées, et ne les communiquez jamais à qui que ce soit — toute personne qui les possède peut accéder à votre compte à votre place.
 
@@ -180,7 +180,7 @@ Ce point concerne une erreur relative au lien de filiation (nom des parents) enr
 
 PROBLÈME DE VALIDITÉ DU PV
 
-Ce point concerne une anomalie détectée sur le procès-verbal (PV) du baccalauréat que vous avez renseigné.
+Ce point concerne une anomalie détectée sur le PV du baccalauréat que vous avez renseigné.
 
 1. Contactez le centre d'appel, qui vérifiera vos informations.
 2. Si une anomalie est confirmée, votre dossier est transmis à l'équipe technique de l'orientation, et vous pourriez être invité à vous présenter en personne pour clarification.
