@@ -111,13 +111,18 @@ Réponds UNIQUEMENT par OUI ou NON, rien d'autre."""
             except Exception:
                 return False  # erreur technique -> ne jamais écarter à tort
 
+        # Double vérification SYMÉTRIQUE (2 appels systématiques, dans les
+        # deux sens) -- corrige un bug réel trouvé en test : l'ancienne
+        # version ne redemandait qu'en cas de 1er avis "hors sujet", pas
+        # en cas de 1er avis "pertinent". Résultat observé concrètement :
+        # "Quelle est la capitale de la France ?" (exemple hors-sujet
+        # documenté juste au-dessus) acceptée à tort sur un seul appel
+        # instable, sans jamais être recontrôlée. Ne trancher "hors sujet"
+        # que si les 2 appels concordent ; en cas de désaccord entre les 2,
+        # privilégier la recherche (moins coûteux qu'un rejet à tort).
         premier_avis = _demander_une_fois()
-        if not premier_avis:
-            return False  # jugé pertinent dès le premier appel -> on s'arrête là
-
-        # Premier avis = hors sujet -> on redemande pour confirmer avant de rejeter
         second_avis = _demander_une_fois()
-        return premier_avis and second_avis  # rejet seulement si les 2 appels concordent
+        return premier_avis and second_avis
 
     def classifier_intention(self, question: str) -> dict:
         if self._est_hors_sujet(question):
@@ -278,6 +283,48 @@ Exemple : {{"intention": "liste", "ville": "Kankan", "ies": null, "mot_cle_progr
         resultats.sort(key=lambda x: x[2], reverse=True)
         return resultats[:k_final]
 
+    def rechercher_debouches_lies(self, nom_programme_mentionne: str) -> list:
+        """Trouve le(s) programme(s) dont le nom correspond à la mention de
+        l'utilisateur, PUIS récupère leurs débouchés via une liaison
+        garantie par programme_id (pas par ressemblance de texte) --
+        élimine le risque de confondre les débouchés de deux programmes au
+        nom proche (ex: les 14 variantes de "Licence En Droit", chacune
+        avec ses propres débouchés distincts)."""
+        nom_norm = normaliser(nom_programme_mentionne)
+        programmes_correspondants = [
+            (id_, meta) for id_, meta in
+            ((self.corpus_ids[i], m) for i, m in enumerate(self.corpus_metadatas))
+            if meta.get("type") == "programme" and nom_norm in normaliser(meta.get("programme", ""))
+        ]
+        if not programmes_correspondants:
+            return []
+
+        ids_programmes_trouves = {id_ for id_, _ in programmes_correspondants}
+
+        resultats = []
+        for i, meta in enumerate(self.corpus_metadatas):
+            if meta.get("type") != "debouches":
+                continue
+            ids_lies = set(meta.get("programme_ids", "").split(","))
+            if ids_lies & ids_programmes_trouves:  # intersection non vide = vraiment lié
+                resultats.append({
+                    "id": self.corpus_ids[i],
+                    # "score" ajouté volontairement (1.0, confiance maximale
+                    # puisque la liaison est garantie par ID, pas par simple
+                    # similarité) -- SANS cette clé, construire_contexte()
+                    # dans llm.py traite à tort ces résultats comme le
+                    # format "liste" condensé (ville/université/seuil),
+                    # qui ne sait pas afficher un texte de débouchés et
+                    # perd purement et simplement le contenu réel (bug
+                    # sérieux trouvé et corrigé en relecture -- le vrai
+                    # texte des débouchés disparaissait, remplacé par des
+                    # "?" partout).
+                    "score": 1.0,
+                    "texte": self.corpus_textes[i],
+                    "metadata": meta,
+                })
+        return resultats
+
     def recherche_fait(self, question: str, filtres: dict | None = None) -> list:
         liste_sem = self._recherche_semantique(question, K_CANDIDATS_INITIAUX, filtres)
         liste_bm25 = self._recherche_bm25(question, K_CANDIDATS_INITIAUX, filtres)
@@ -287,10 +334,17 @@ Exemple : {{"intention": "liste", "ville": "Kankan", "ies": null, "mot_cle_progr
         resultats = self._reranker_candidats(question, candidats, K_RESULTATS_FINAUX)
         if not resultats or resultats[0][2] < SEUIL_CONFIANCE_MIN:
             return []
+        # Filtre le seuil sur CHAQUE résultat individuellement, pas
+        # seulement le premier -- bug réel trouvé en relecture : avant
+        # cette correction, si le meilleur résultat passait le seuil, TOUS
+        # les résultats (jusqu'à 5) étaient renvoyés tels quels, même ceux
+        # largement en dessous du seuil de confiance (score à 0.08 par
+        # exemple), envoyés au LLM comme s'ils étaient tous pertinents.
         return [
             {"id": id_, "texte": texte, "score": float(score),
              "metadata": self.corpus_metadatas[self.id_vers_index[id_]]}
             for id_, texte, score in resultats
+            if score >= SEUIL_CONFIANCE_MIN
         ]
 
     # ------------------------------------------------------------------
@@ -378,4 +432,41 @@ Exemple : {{"intention": "liste", "ville": "Kankan", "ies": null, "mot_cle_progr
             return _resultat("liste", candidats_avec_moyenne)
 
         resultats = self.recherche_fait(question_normalisee)
+
+        # Renfort déterministe pour les questions de débouchés : si la
+        # question mentionne "débouché" ET qu'un nom de programme précis
+        # est identifiable littéralement dans la question, on ajoute en
+        # priorité les fiches débouchés liées par programme_id (garanti
+        # exact) -- indépendamment de ce que la recherche sémantique a
+        # trouvé, pour éliminer le risque de confondre les débouchés de
+        # deux programmes au nom proche (vérifié en test réel sur les 14
+        # variantes de "Licence En Droit" : chacune a ses propres
+        # débouchés, jamais mélangés avec cette méthode).
+        if "debouch" in normaliser(question_normalisee):
+            programme_mentionne = self._detecter_nom_programme_dans_texte(question_normalisee)
+            if programme_mentionne:
+                resultats_lies = self.rechercher_debouches_lies(programme_mentionne)
+                ids_deja_presents = {r["id"] for r in resultats}
+                nouveaux = [r for r in resultats_lies if r["id"] not in ids_deja_presents]
+                resultats = nouveaux + resultats  # priorité aux résultats garantis par ID
+
         return _resultat("fait", resultats)
+
+    def _detecter_nom_programme_dans_texte(self, texte: str) -> str | None:
+        """Cherche si un nom de programme réel du corpus (ou sa partie la
+        plus distinctive, après les deux-points) apparaît littéralement
+        dans le texte de la question -- utilisé pour la liaison débouchés
+        garantie par ID. Retourne le nom le plus long trouvé (le plus
+        spécifique), ou None si aucun ne correspond."""
+        texte_norm = normaliser(texte)
+        meilleur_match = None
+        for meta in self.corpus_metadatas:
+            if meta.get("type") != "programme":
+                continue
+            nom = meta.get("programme", "")
+            partie_distinctive = nom.split(":")[-1].strip() if ":" in nom else nom
+            partie_norm = normaliser(partie_distinctive)
+            if len(partie_norm) > 6 and partie_norm in texte_norm:
+                if meilleur_match is None or len(partie_norm) > len(normaliser(meilleur_match)):
+                    meilleur_match = partie_distinctive
+        return meilleur_match
