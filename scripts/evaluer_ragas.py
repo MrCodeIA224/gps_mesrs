@@ -4,12 +4,22 @@ EVALUATION RAGAS — Adaptée à l'architecture v2 (retrieval à double chemin).
 Important : les questions de type "liste" (ex: "quels programmes à Kankan")
 sortent du cadre classique de RAGAS Faithfulness/ContextPrecision, pensé
 pour un retrieval par similarité -- on les exclut de cette évaluation
-quantitative et on les teste manuellement (voir notebook, section dédiée).
-Seules les questions de type "fait" (hybride + reranking) sont évaluées ici.
+quantitative (voir evaluer_precision_recall.py, qui couvre spécifiquement
+ce chemin avec une mesure de recall + une vérification anti-hallucination
+dédiée). Seules les questions de type "fait" (hybride + reranking) sont
+évaluées ici.
 
-RAGAS utilise Groq comme juge (pas OpenAI par défaut), et BGE-M3 comme
-modèle d'embeddings pour Answer Relevancy, cohérent avec le reste du projet.
+Le jeu de test est chargé depuis data/jeu_de_test_annote.json -- la MÊME
+source que evaluer_precision_recall.py -- plutôt qu'une liste séparée
+codée en dur ici : évite que les deux scripts dérivent avec deux jeux de
+questions différents au fil du temps. Seuls les cas qui portent un champ
+"reference" (une réponse de référence en langage naturel, nécessaire à
+RAGAS) sont repris.
+
+RAGAS utilise Mistral comme juge (cohérent avec le reste du projet), et
+BGE-M3 comme modèle d'embeddings pour Answer Relevancy.
 """
+import json
 import os
 import pandas as pd
 from dotenv import load_dotenv
@@ -27,18 +37,20 @@ from llm import appeler_llm
 
 load_dotenv()
 
-JEU_DE_TEST = [
-    {"question": "Quels sont les débouchés en biologie ?",
-     "reference": "Les débouchés incluent notamment technicien de laboratoire, enseignant, poursuite en master."},
-    {"question": "Combien coûtent les frais d'orientation ?",
-     "reference": "Les frais d'orientation sont de 50 000 GNF, payables par Orange Money."},
-    {"question": "Comment récupérer mon mot de passe oublié ?",
-     "reference": "Cliquer sur mot de passe oublié, choisir SMS ou e-mail, renseigner son INE, recevoir un nouveau mot de passe."},
-    {"question": "J'ai eu 10/20 au bac, puis-je faire l'architecture ?",
-     "reference": "Le seuil requis pour le programme d'architecture (ISAU) est de 13/20, donc 10/20 est insuffisant."},
-    {"question": "Quelle est la capitale de la France ?",
-     "reference": "Question hors périmètre, le chatbot doit se recentrer sur l'orientation."},
-]
+JEU_DE_TEST_PATH = "../data/jeu_de_test_annote.json"
+
+
+def charger_jeu_de_test() -> list:
+    with open(JEU_DE_TEST_PATH, encoding="utf-8") as f:
+        tous_les_cas = json.load(f)
+    return [
+        {"question": cas["question"], "reference": cas["reference"]}
+        for cas in tous_les_cas
+        if cas.get("reference")
+    ]
+
+
+JEU_DE_TEST = charger_jeu_de_test()
 
 
 def construire_dataset(moteur: MoteurRecherche) -> EvaluationDataset:

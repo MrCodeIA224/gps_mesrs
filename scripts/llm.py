@@ -15,7 +15,7 @@ from dotenv import load_dotenv
 from mistralai.client import Mistral
 from mistralai.client.errors import SDKError
 from securite import masquer_donnees_sensibles
-from utils_texte import extraire_json_de_texte
+from utils_texte import normaliser
 
 load_dotenv()
 client = Mistral(api_key=os.environ["MISTRAL_API_KEY"])
@@ -524,6 +524,47 @@ def verifier_chiffres_non_verifies(reponse: str, contexte: str) -> list:
     return suspects
 
 
+_CONNECTEURS_NOM_PROGRAMME = r"(?:en|de|des|du|la|le|les|et|d'|d’|à|l'|l’)"
+_MOT_NOM_PROGRAMME = rf"(?:[A-ZÀ-Ý][^\s.,;:]*|{_CONNECTEURS_NOM_PROGRAMME})"
+_MOTIF_NOM_PROGRAMME = re.compile(
+    rf"\b(?:[Ll]icence|[Dd]octorat|[Mm]aster|[Ii]nstitut|[Gg]énie)\b(?:\s+{_MOT_NOM_PROGRAMME}){{1,10}}"
+)
+
+
+def _extraire_noms_programmes(texte: str) -> list:
+    """Extrait les mentions de programmes ('Licence en X', 'Licence En X',
+    'Doctorat en X'...) présentes dans un texte, pour vérification contre
+    le contexte fourni -- même logique que _extraire_montants_et_numeros,
+    appliquée aux noms propres plutôt qu'aux chiffres.
+
+    Le motif s'arrête au premier mot qui n'est ni capitalisé ni un
+    connecteur français courant (ex: un adjectif en minuscule comme
+    "moléculaire") -- il capture donc parfois un nom TRONQUÉ plutôt que le
+    nom complet officiel. C'est volontaire et sans danger pour cet usage :
+    un nom tronqué reste un préfixe exact du nom complet quand la réponse
+    est correcte (donc toujours retrouvé comme sous-chaîne du contexte),
+    et un nom inventé reste absent du contexte qu'il soit tronqué ou non."""
+    return _MOTIF_NOM_PROGRAMME.findall(texte)
+
+
+def verifier_entites_non_verifiees(reponse: str, contexte: str) -> list:
+    """Filet de sécurité indépendant du prompt, même principe que
+    verifier_chiffres_non_verifies() mais pour les noms de
+    programme/diplôme : signale toute mention dans la réponse qui
+    n'apparaît PAS (même approximativement, après normalisation) dans le
+    contexte documentaire fourni pour cette question.
+
+    Complète verifier_chiffres_non_verifies(), qui ne couvre que les
+    montants et numéros de téléphone -- sans ce filet, un programme réel du
+    corpus mais cité hors de son contexte (mélange entre deux fiches, ou
+    programme totalement inventé) n'était détecté par aucun code, seulement
+    par l'obéissance du LLM à la section 36 du prompt système (interdiction
+    de suggérer des programmes non vérifiés)."""
+    noms = _extraire_noms_programmes(reponse)
+    contexte_normalise = normaliser(contexte)
+    return [n for n in noms if normaliser(n) not in contexte_normalise]
+
+
 def verifier_reponse_par_llm(question: str, contexte: str, reponse: str) -> dict:
     """Deuxième appel LLM, indépendant du premier, qui vérifie la fidélité
     de la réponse au contexte RAG.
@@ -656,43 +697,30 @@ def appeler_llm(question: str, resultats: list | None, slots: dict | None = None
                 "Merci de réessayer dans quelques instants. Si le problème persiste, "
                 "vous pouvez contacter le centre d'appel de votre ville.")
 
-    # ------------------------------------------------------------------
-    # VALIDATION EN DEUX COUCHES INDÉPENDANTES : juge LLM + contrôles
-    # déterministes (montants/numéros/sigles). Une réponse n'est acceptée
-    # que si LES DEUX passent -- contrairement à une version antérieure où
-    # le contrôle déterministe n'était qu'un avertissement ajouté après
-    # coup (l'étudiant voyait quand même le chiffre suspect). Principe
-    # FAIL-SAFE : en cas de doute (ERROR du juge, ou suspects détectés),
-    # on régénère une fois, puis on se replie sur un message honnête
-    # plutôt que de laisser passer une réponse non vérifiée.
-    #
-    # Le contexte de vérification déterministe inclut l'historique récent
-    # (pas seulement le contexte RAG de cette question précise) -- sans
-    # quoi un numéro de centre d'appel correctement réutilisé depuis un
-    # échange précédent de la MÊME conversation serait signalé à tort
-    # comme "non confirmé", déclenchant une régénération inutile (plus
-    # coûteux qu'un simple avertissement, vu que le contrôle déterministe
-    # bloque maintenant au lieu de juste avertir).
-    contexte_verification = contexte
-    if historique:
-        contexte_verification += "\n\n" + "\n".join(
-            f"{e['question']} {e['reponse']}" for e in historique[-5:]
-        )
+    # Filet de sécurité indépendant du prompt : vérifie après coup si des
+    # montants/numéros de téléphone, ET des noms de programme/diplôme, dans
+    # la réponse générée apparaissent bien dans le contexte fourni -- ne
+    # corrige pas automatiquement (trop risqué), mais logge un avertissement
+    # clair en console pour un suivi manuel. Cas réel ayant motivé le
+    # premier filet (chiffres) : un montant de 150 000 GNF (inscription)
+    # confondu avec celui de l'orientation (50 000 GNF), absent du contexte
+    # de la question posée -- le second filet (noms de programme) applique
+    # le même principe au cas symétrique décrit en section 36 du prompt
+    # système (programme suggéré mais non confirmé par le contexte fourni).
+    suspects = verifier_chiffres_non_verifies(reponse, contexte) + verifier_entites_non_verifiees(reponse, contexte)
+    if suspects:
+        print(f"[ALERTE ANTI-HALLUCINATION] Élément(s) non vérifié(s) dans le contexte : "
+              f"{suspects} -- question : {question!r}")
+        # Signal visible directement dans le chat, en plus du log console --
+        # plus fiable qu'un print (dont l'affichage dans le terminal peut
+        # varier selon l'environnement), et surtout directement utile à
+        # l'étudiant, pas seulement à des fins de débogage.
+        valeurs_texte = ", ".join(suspects)
+        reponse += (f"\n\n⚠️ *Attention : cette réponse mentionne ({valeurs_texte}) qui n'a pas "
+                    f"pu être confirmé dans la documentation pour cette question précise. "
+                    f"Vérifiez ce point auprès du centre d'appel avant de vous y fier.*")
 
-    if contexte:
-        verdict = verifier_reponse_par_llm(question_masquee, contexte, reponse)
-
-        if verdict.get("verdict") == "ERROR":
-            print("[VÉRIFICATEUR LLM] Vérification impossible -> fallback sécurisé")
-            return ("Je ne peux pas valider suffisamment cette réponse avec les "
-                     "informations disponibles. Reformulez votre question ou "
-                     "contactez le centre d'appel de votre ville pour une confirmation officielle.")
-
-        suspects = verifier_chiffres_non_verifies(reponse, contexte_verification)
-
-        # Acceptée seulement si les DEUX couches passent.
-        if verdict.get("verdict") == "PASS" and not suspects:
-            return reponse
+    return reponse
 
         claims = list(verdict.get("unsupported_claims", []))
         if suspects:

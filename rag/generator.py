@@ -97,7 +97,7 @@ def generate_answer(prompt, model, tokenizer):
     messages = [
         {
             "role": "system",
-            "content": "SYSTEM_PROMPT"     
+            "content": SYSTEM_PROMPT
         },
         {
             "role": "user",

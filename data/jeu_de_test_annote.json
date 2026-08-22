@@ -1,0 +1,139 @@
+[
+  {
+    "categorie": "fait_precis",
+    "question": "Quel est le seuil requis pour la Licence en Biologie moléculaire et Biotechnologies à l'UGANC ?",
+    "type_attendu": "fait",
+    "fiche_attendue": "prog_001",
+    "reference": "Le seuil requis pour la Licence en Biologie moléculaire et Biotechnologies à l'UGANC est de 12/20.",
+    "notes": "Vérifie que le retrieval récupère la bonne fiche parmi les 383 fiches programme, malgré la proximité avec d'autres licences du même département (Biologie, UGANC)."
+  },
+  {
+    "categorie": "fait_precis",
+    "question": "Quel est le seuil d'accès pour la Licence en Architecture Intérieure et Design d'Espace à l'ISAU ?",
+    "type_attendu": "fait",
+    "fiche_attendue": "prog_148",
+    "reference": "Le seuil pour la Licence en Architecture Intérieure et Design d'Espace à l'ISAU est de 12/20.",
+    "notes": "Nom de programme long et composé -- vérifie que le retrieval ne confond pas avec Génie en Architecture (prog_147, même établissement, seuil différent de 13/20)."
+  },
+  {
+    "categorie": "fait_precis",
+    "question": "Quels sont les débouchés de la Licence en Biologie, Licence Fondamentale ?",
+    "type_attendu": "fait",
+    "fiche_attendue": "debouches_licence_en_biologie_licence_fondamentale",
+    "reference": "Débouchés : technicien/assistant de recherche en laboratoire, enseignant SVT, agent de santé publique, poursuite en master/doctorat.",
+    "notes": "Vérifie le retrieval sur le corpus 'débouchés' (referentiel_programme_rag), distinct du corpus 'programme'."
+  },
+  {
+    "categorie": "fait_precis",
+    "question": "Comment récupérer mon mot de passe oublié sur ParcourSup Guinée ?",
+    "type_attendu": "fait",
+    "fiche_attendue": "guide_mot_de_passe_oublié",
+    "reference": "Cliquer sur mot de passe oublié, choisir SMS ou e-mail, renseigner son INE, recevoir un nouveau mot de passe.",
+    "notes": "Question de procédure -- doit être classée 'fait', pas 'liste' (cf. bug documenté dans retrieval.py sur les questions de procédure envoyées à tort sur le chemin liste)."
+  },
+  {
+    "categorie": "raisonnement_numerique",
+    "question": "J'ai eu 12/20 au bac SE, puis-je faire la Licence en Biologie moléculaire et Biotechnologies à l'UGANC ?",
+    "type_attendu": "liste",
+    "fiche_attendue": "prog_001",
+    "notes": "Moyenne == seuil exact (12/20) -- cas limite, doit être jugé éligible (comparaison >=), pas halluciner un refus."
+  },
+  {
+    "categorie": "raisonnement_numerique",
+    "question": "J'ai eu 10/20 au bac SE, est-ce que je peux intégrer Génie en Architecture à l'ISAU ?",
+    "type_attendu": "liste",
+    "fiche_attendue": "prog_147",
+    "notes": "Moyenne (10) < seuil réel (13) -- le programme doit être signalé comme non atteint, en expliquant l'inéligibilité avec le vrai seuil plutôt que de répondre 'je ne sais pas' (section 34 du prompt + mécanisme 'note' de retrieval.py)."
+  },
+  {
+    "categorie": "vocabulaire_different",
+    "question": "j'ai eu 12 de moyenne au bas, est-ce que je peux faire la bioinformatique a l'uganc",
+    "type_attendu": "liste",
+    "fiche_attendue": "prog_004",
+    "notes": "Teste la correction 'bas' -> 'bac' (confusion connue et dangereuse, pretraitement.py) combinée à une question numérique."
+  },
+  {
+    "categorie": "vocabulaire_different",
+    "question": "quels programmes a konakry en informatique",
+    "type_attendu": "liste",
+    "fiche_attendue": "prog_004",
+    "notes": "Teste la correction orthographique 'Konakry' -> 'Conakry' (CONFUSIONS_CONNUES de pretraitement.py) -- ville la plus demandée du corpus."
+  },
+  {
+    "categorie": "choix_programmes",
+    "question": "Comment formuler mes choix de programmes sur ParcourSup Guinée ?",
+    "type_attendu": "fait",
+    "fiche_attendue": "guide_procédure_de_sélection_des_choix",
+    "notes": "Vérifie que la procédure des 15 choix est bien retrouvée, distincte de la fiche 'les choix ne s'affichent pas' (problème technique, pas procédure)."
+  },
+  {
+    "categorie": "etablissement",
+    "question": "Présente-moi l'Université Julius Nyerere de Kankan",
+    "type_attendu": "fait",
+    "fiche_attendue": "etab_003",
+    "notes": "Retrieval sur le corpus 'établissement' (18 fiches), le plus petit des 4 corpus -- ne doit pas être noyé par les fiches programme de la même ville."
+  },
+  {
+    "categorie": "etablissement",
+    "question": "Quel type d'établissement est l'ISAU ?",
+    "type_attendu": "fait",
+    "fiche_attendue": "etab_005",
+    "notes": "Question posée par sigle uniquement (pas le nom complet) -- teste la robustesse du retrieval aux sigles d'établissement."
+  },
+  {
+    "categorie": "liste",
+    "question": "Quels programmes de biologie propose l'UGANC ?",
+    "type_attendu": "liste",
+    "fiches_attendues": ["prog_001", "prog_002", "prog_003", "prog_004", "prog_005", "prog_006", "prog_010"],
+    "notes": "Teste le chemin 'liste' complet (pas de limite à 5, contrairement au chemin 'fait') -- toutes les fiches du département Biologie de l'UGANC doivent être retournées, pas seulement les plus proches sémantiquement de la formulation."
+  },
+  {
+    "categorie": "liste",
+    "question": "univ gamal quels programmes en biologie",
+    "type_attendu": "liste",
+    "fiches_attendues": ["prog_001", "prog_002", "prog_003", "prog_004", "prog_005", "prog_006", "prog_010"],
+    "notes": "Combine la substitution d'abréviation ('univ gamal' -> nom complet de l'UGANC, pretraitement.py) et le chemin liste -- même attendu que le cas précédent, formulation différente."
+  },
+  {
+    "categorie": "salutation",
+    "question": "Bonjour",
+    "type_attendu": null,
+    "notes": "Doit être un court-circuit en code (salutations.py), sans appel LLM ni retrieval."
+  },
+  {
+    "categorie": "salutation",
+    "question": "Merci beaucoup",
+    "type_attendu": null,
+    "notes": "Idem, sur le motif de remerciement plutôt que de salutation."
+  },
+  {
+    "categorie": "donnee_sensible",
+    "question": "mon mot de passe est Guinee2026, je n'arrive pas à me connecter",
+    "type_attendu": null,
+    "notes": "Le mot de passe fourni spontanément ('Guinee2026') ne doit apparaître ni dans la version masquée stockée en mémoire/logs (securite.py), ni être répété par le LLM dans sa réponse (section 12 du prompt système)."
+  },
+  {
+    "categorie": "hors_sujet",
+    "question": "Quelle est la capitale de la France ?",
+    "type_attendu": "hors_sujet",
+    "notes": "Cas hors-sujet évident -- doit être rejeté dès le premier avis du double-vérificateur (retrieval.py, _est_hors_sujet)."
+  },
+  {
+    "categorie": "hors_sujet",
+    "question": "Raconte-moi une blague",
+    "type_attendu": "hors_sujet",
+    "notes": "Hors-sujet formulé de façon informelle/conversationnelle plutôt que factuelle."
+  },
+  {
+    "categorie": "clarification",
+    "question": "Quelles universités sont disponibles ?",
+    "type_attendu": "clarification",
+    "notes": "Question de type 'liste' avec 0 filtre exploitable (ni ville, ni établissement, ni domaine, ni profil) -- doit déclencher le garde-fou de clarification plutôt que de renvoyer tout le catalogue (retrieval.py, rechercher())."
+  },
+  {
+    "categorie": "clarification",
+    "question": "Quels programmes puis-je faire ?",
+    "type_attendu": "clarification",
+    "notes": "Même garde-fou que le cas précédent (0 filtre exploitable), formulé différemment."
+  }
+]

@@ -18,6 +18,7 @@ La détection du chemin à emprunter se fait par extraction LLM légère
 rester robuste aux formulations variées d'un étudiant.
 """
 import json
+from pathlib import Path
 import chromadb
 import numpy as np
 from rank_bm25 import BM25Okapi
@@ -26,7 +27,10 @@ from llm import appeler_llm_brut
 from utils_texte import normaliser, extraire_json_de_texte
 from pretraitement import construire_vocabulaire_domaine, normaliser_et_corriger, code_profil_bac
 
-CHROMA_PATH = "../data/chroma_db"
+# Chemin absolu (indépendant du répertoire de travail courant) : ce module
+# est désormais aussi importé depuis main.py à la racine du projet, pas
+# seulement exécuté depuis scripts/.
+CHROMA_PATH = str(Path(__file__).resolve().parent.parent / "data" / "chroma_db")
 NOM_COLLECTION = "orientation_guinee_v2"
 NOM_MODELE_EMBEDDING = "BAAI/bge-m3"
 NOM_MODELE_RERANKER = "BAAI/bge-reranker-v2-m3"
