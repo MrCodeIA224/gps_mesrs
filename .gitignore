@@ -33,3 +33,10 @@ pip-delete-this-directory.txt
 .DS_Store
 
 chroma_db/
+
+
+# Environment variables (le "/" final ne couvre que les dossiers -- sans
+# le motif ci-dessous, le fichier .env lui-même, contenant la vraie clé
+# API, ne serait pas ignoré)
+.env
+.env/

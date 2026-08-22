@@ -1,81 +1,149 @@
 """
 fonction.py — Fonctions utilitaires du projet GPS-MESRS
 
-Ce fichier centralise toute la logique métier du projet :
-chargement des données, embeddings, retrieval, appel au LLM.
+Ce fichier centralise toute la logique métier du projet : chargement du
+moteur de recherche, orchestration retrieval + mémoire + LLM (déléguée à
+scripts/), export PDF, enregistrement des évaluations.
 
-Statut actuel : la fonction repondre() est un BOUCHON (mock).
-Elle sera remplacée par le vrai pipeline RAG une fois que la partie
-"Cœur RAG" (embeddings + retrieval + LLM) sera prête.
+Le pipeline RAG réel vit dans scripts/ (retrieval.py, llm.py, memoire.py,
+salutations.py, logs.py) -- ce fichier ne fait qu'orchestrer ces briques
+pour l'interface définie dans main.py, exactement comme le faisait
+auparavant scripts/app.py (supprimé : sa seule raison d'être était cette
+orchestration, désormais ici, et main.py offre une interface plus complète
+-- bouton flottant, export PDF, évaluation).
 
 Convention de retour : repondre() renvoie toujours un tuple
-(reponse: str, sources: list[dict]) pour que main.py n'ait rien
-à changer le jour où on branche le vrai pipeline.
+(reponse: str, sources: list[dict]).
 """
 
-import time
-import random
+import sys
+from pathlib import Path
+
+# scripts/ n'est pas un package Python (ses modules s'importent entre eux
+# en absolu, ex. "from llm import appeler_llm_brut", en supposant que
+# scripts/ est sur sys.path -- c'est le cas quand on lance un script
+# directement depuis ce dossier). On ajoute donc scripts/ à sys.path ici
+# pour que ces imports internes continuent de fonctionner tels quels
+# quand ce module est importé depuis la racine du projet (main.py).
+_SCRIPTS_DIR = Path(__file__).resolve().parent / "scripts"
+if str(_SCRIPTS_DIR) not in sys.path:
+    sys.path.insert(0, str(_SCRIPTS_DIR))
+
+try:
+    from retrieval import MoteurRecherche
+    from llm import appeler_llm
+    from memoire import etat_initial, reformuler_avec_historique, mettre_a_jour_slots_depuis_entites, ajouter_echange
+    from salutations import reponse_fixe_si_politesse
+    from logs import enregistrer_echange
+    _ERREUR_PIPELINE = None
+except Exception as erreur:  # dépendances manquantes, clé API absente...
+    _ERREUR_PIPELINE = erreur
 
 
 # ---------------------------------------------------------------------------
-# TODO (Personne B) : remplacer ce bloc par le chargement réel des données
-# (JSON -> chunks -> embeddings -> base vectorielle), au démarrage de l'app.
+# Chargement du moteur de recherche (mis en cache par Streamlit : coûteux --
+# charge les modèles d'embedding/reranking et l'index Chroma en mémoire)
 # ---------------------------------------------------------------------------
 
-def charger_base_connaissances():
-    """
-    TODO : charger et indexer les fichiers JSON (data/) dans la base
-    vectorielle (ex. ChromaDB, FAISS). Appelée une seule fois au
-    démarrage de l'application (voir main.py, mise en cache Streamlit).
-    """
-    pass
+def _charger_moteur():
+    import streamlit as st
+
+    @st.cache_resource(show_spinner="Chargement du moteur de recherche...")
+    def _construire():
+        return MoteurRecherche()
+
+    return _construire()
+
+
+# ---------------------------------------------------------------------------
+# État de mémoire du pipeline RAG (slots, historique technique, dernier
+# menu proposé) -- distinct de st.session_state.historique dans main.py,
+# qui ne sert qu'à l'affichage des bulles de chat.
+# ---------------------------------------------------------------------------
+
+def etat_memoire_initial() -> dict:
+    if _ERREUR_PIPELINE is not None:
+        return {}
+    return etat_initial()
 
 
 # ---------------------------------------------------------------------------
 # Fonction principale utilisée par l'interface (main.py)
 # ---------------------------------------------------------------------------
 
-def repondre(question: str) -> tuple[str, list[dict]]:
+def repondre(question: str, etat_memoire: dict) -> str:
     """
-    Prend la question de l'utilisateur et renvoie une réponse.
-
-    TODO (Personne B) : remplacer ce bouchon par le vrai pipeline :
-        1. Embedding de la question
-        2. Recherche des chunks pertinents (retrieval)
-        3. Appel au LLM avec la question + les chunks trouvés
-        4. Retour de la réponse générée + des sources utilisées
+    Prend la question de l'utilisateur et renvoie une réponse, en s'appuyant
+    sur le pipeline RAG complet de scripts/ :
+        1. Court-circuit salutation/politesse (pas d'appel LLM)
+        2. Mémoire : reformulation de la question + résolution d'un menu proposé
+        3. Retrieval : route fait/liste/hors-sujet/clarification
+        4. Mémoire : mise à jour des slots à partir des entités extraites
+        5. Génération de la réponse (ou court-circuit hors-sujet/clarification)
+        6. Logs de l'échange
+        7. Mémoire : masquage des données sensibles avant stockage
 
     Args:
         question: la question posée par l'utilisateur.
+        etat_memoire: dictionnaire de session créé par etat_memoire_initial(),
+            à conserver dans st.session_state d'un appel à l'autre.
 
     Returns:
-        Un tuple (reponse, sources) où :
-        - reponse (str) : le texte de la réponse à afficher
-        - sources (list[dict]) : liste des sources utilisées, chacune
-          sous la forme {"titre": ..., "source": ...}
+        Le texte de la réponse à afficher.
     """
-    time.sleep(0.6)  # simule un temps de traitement réaliste
+    if _ERREUR_PIPELINE is not None:
+        return (
+            "⚠️ Le moteur de recherche n'est pas encore configuré sur cette machine "
+            f"({_ERREUR_PIPELINE}). Vérifiez l'installation des dépendances de "
+            "scripts/requirements.txt, la présence d'une clé MISTRAL_API_KEY dans un "
+            "fichier .env, et que l'index vectoriel a bien été construit "
+            "(scripts/4_indexer_chroma.py)."
+        )
 
-    reponses_bouchon = [
-        "Ceci est une réponse simulée. Le vrai pipeline RAG n'est pas encore branché.",
-        "[Réponse de test] Une fois le retrieval prêt, cette réponse viendra des guides officiels du MESRS.",
-    ]
+    reponse_fixe = reponse_fixe_si_politesse(question)
+    if reponse_fixe:
+        return reponse_fixe
 
-    sources_bouchon = [
-        {"titre": "Exemple de programme — Économie", "source": "matrice_programmes"},
-        {"titre": "Critères d'orientation — Bac SE", "source": "guide_orientation"},
-    ]
+    moteur = _charger_moteur()
 
-    # sources_bouchon = [
-    #     {"titre": "Exemple de programme — Économie", "source": "matrice_programmes"},
-    #     {"titre": "Critères d'orientation — Bac SE", "source": "guide_orientation"},
-    # ]
+    question_traitee = reformuler_avec_historique(question, etat_memoire)
 
-    return random.choice(reponses_bouchon), sources_bouchon
+    resultat_recherche = moteur.rechercher(question_traitee)
+
+    mettre_a_jour_slots_depuis_entites(etat_memoire, resultat_recherche["entites"])
+
+    if resultat_recherche["intention"] == "hors_sujet":
+        reponse = ("Je suis spécialisé dans l'orientation universitaire et les démarches "
+                   "ParcourSup Guinée. Posez-moi une question sur ce sujet, je serai ravi de vous aider !")
+    elif resultat_recherche["intention"] == "clarification":
+        reponse = ("Pour vous répondre précisément, pouvez-vous préciser un peu votre demande ? "
+                   "Par exemple : votre profil de bac, la ville ou l'université qui vous intéresse, "
+                   "ou le domaine d'études recherché.")
+    else:
+        reponse = appeler_llm(
+            question_traitee,
+            resultat_recherche["resultats"],
+            slots=etat_memoire["slots"],
+            note=resultat_recherche.get("note"),
+            historique=etat_memoire["historique"],
+        )
+
+    enregistrer_echange(
+        question=question,
+        reponse=reponse,
+        intention_technique=resultat_recherche["intention"],
+        intention_metier=resultat_recherche["entites"]["intention_metier"],
+        nb_resultats=len(resultat_recherche["resultats"]),
+        ville=etat_memoire["slots"].get("ville"),
+    )
+
+    ajouter_echange(etat_memoire, question, reponse)
+
+    return reponse
 
 
 # ---------------------------------------------------------------------------
-# Questions d'exemple affichées dans l'interface (sidebar)
+# Questions d'exemple affichées dans l'interface (page d'accueil)
 # ---------------------------------------------------------------------------
 
 QUESTIONS_EXEMPLES = [

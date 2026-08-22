@@ -17,10 +17,14 @@ amont -- on remasque explicitement avant écriture, par défense en profondeur.
 import json
 import os
 from datetime import datetime, timezone
+from pathlib import Path
 from securite import masquer_donnees_sensibles
 from llm import appeler_llm_brut
 
-LOGS_PATH = "../data/logs_conversations.jsonl"
+# Chemin absolu (indépendant du répertoire de travail courant) : ce module
+# est désormais aussi importé depuis main.py à la racine du projet, pas
+# seulement exécuté depuis scripts/.
+LOGS_PATH = str(Path(__file__).resolve().parent.parent / "data" / "logs_conversations.jsonl")
 
 INTENTIONS_METIER = [
     "procedure", "recherche_programme", "recherche_universite", "paiement",

@@ -18,6 +18,7 @@ from dotenv import load_dotenv
 from mistralai.client import Mistral
 from mistralai.client.errors import SDKError
 from securite import masquer_donnees_sensibles
+from utils_texte import normaliser
 
 load_dotenv()
 client = Mistral(api_key=os.environ["MISTRAL_API_KEY"])
@@ -430,6 +431,47 @@ def verifier_chiffres_non_verifies(reponse: str, contexte: str) -> list:
     return suspects
 
 
+_CONNECTEURS_NOM_PROGRAMME = r"(?:en|de|des|du|la|le|les|et|d'|d’|à|l'|l’)"
+_MOT_NOM_PROGRAMME = rf"(?:[A-ZÀ-Ý][^\s.,;:]*|{_CONNECTEURS_NOM_PROGRAMME})"
+_MOTIF_NOM_PROGRAMME = re.compile(
+    rf"\b(?:[Ll]icence|[Dd]octorat|[Mm]aster|[Ii]nstitut|[Gg]énie)\b(?:\s+{_MOT_NOM_PROGRAMME}){{1,10}}"
+)
+
+
+def _extraire_noms_programmes(texte: str) -> list:
+    """Extrait les mentions de programmes ('Licence en X', 'Licence En X',
+    'Doctorat en X'...) présentes dans un texte, pour vérification contre
+    le contexte fourni -- même logique que _extraire_montants_et_numeros,
+    appliquée aux noms propres plutôt qu'aux chiffres.
+
+    Le motif s'arrête au premier mot qui n'est ni capitalisé ni un
+    connecteur français courant (ex: un adjectif en minuscule comme
+    "moléculaire") -- il capture donc parfois un nom TRONQUÉ plutôt que le
+    nom complet officiel. C'est volontaire et sans danger pour cet usage :
+    un nom tronqué reste un préfixe exact du nom complet quand la réponse
+    est correcte (donc toujours retrouvé comme sous-chaîne du contexte),
+    et un nom inventé reste absent du contexte qu'il soit tronqué ou non."""
+    return _MOTIF_NOM_PROGRAMME.findall(texte)
+
+
+def verifier_entites_non_verifiees(reponse: str, contexte: str) -> list:
+    """Filet de sécurité indépendant du prompt, même principe que
+    verifier_chiffres_non_verifies() mais pour les noms de
+    programme/diplôme : signale toute mention dans la réponse qui
+    n'apparaît PAS (même approximativement, après normalisation) dans le
+    contexte documentaire fourni pour cette question.
+
+    Complète verifier_chiffres_non_verifies(), qui ne couvre que les
+    montants et numéros de téléphone -- sans ce filet, un programme réel du
+    corpus mais cité hors de son contexte (mélange entre deux fiches, ou
+    programme totalement inventé) n'était détecté par aucun code, seulement
+    par l'obéissance du LLM à la section 36 du prompt système (interdiction
+    de suggérer des programmes non vérifiés)."""
+    noms = _extraire_noms_programmes(reponse)
+    contexte_normalise = normaliser(contexte)
+    return [n for n in noms if normaliser(n) not in contexte_normalise]
+
+
 def appeler_llm(question: str, resultats: list | None, slots: dict | None = None,
                  note: str | None = None, historique: list | None = None,
                  temperature: float = 0.2) -> str:
@@ -492,15 +534,18 @@ def appeler_llm(question: str, resultats: list | None, slots: dict | None = None
                 "vous pouvez contacter le centre d'appel de votre ville.")
 
     # Filet de sécurité indépendant du prompt : vérifie après coup si des
-    # montants/numéros de téléphone dans la réponse générée apparaissent
-    # bien dans le contexte fourni -- ne corrige pas automatiquement (trop
-    # risqué), mais logge un avertissement clair en console pour un suivi
-    # manuel. Cas réel ayant motivé cet ajout : un montant de 150 000 GNF
-    # (inscription) confondu avec celui de l'orientation (50 000 GNF),
-    # absent du contexte de la question posée.
-    suspects = verifier_chiffres_non_verifies(reponse, contexte)
+    # montants/numéros de téléphone, ET des noms de programme/diplôme, dans
+    # la réponse générée apparaissent bien dans le contexte fourni -- ne
+    # corrige pas automatiquement (trop risqué), mais logge un avertissement
+    # clair en console pour un suivi manuel. Cas réel ayant motivé le
+    # premier filet (chiffres) : un montant de 150 000 GNF (inscription)
+    # confondu avec celui de l'orientation (50 000 GNF), absent du contexte
+    # de la question posée -- le second filet (noms de programme) applique
+    # le même principe au cas symétrique décrit en section 36 du prompt
+    # système (programme suggéré mais non confirmé par le contexte fourni).
+    suspects = verifier_chiffres_non_verifies(reponse, contexte) + verifier_entites_non_verifiees(reponse, contexte)
     if suspects:
-        print(f"[ALERTE ANTI-HALLUCINATION] Valeur(s) non vérifiée(s) dans le contexte : "
+        print(f"[ALERTE ANTI-HALLUCINATION] Élément(s) non vérifié(s) dans le contexte : "
               f"{suspects} -- question : {question!r}")
         # Signal visible directement dans le chat, en plus du log console --
         # plus fiable qu'un print (dont l'affichage dans le terminal peut
